@@ -2,12 +2,12 @@
 
 ### To Run
 
-`wget https://gitlab.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
+`wget https://github.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
 
 OR
 
-`curl https://gitlab.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
+`curl https://github.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
 
 ### within container
 
-`apt update && apt install wget -y && wget https://gitlab.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
+`apt update && apt install wget -y && wget https://github.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
