@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Simple script to turn on/off the keyboard backlight of a Cromebook with
+# the leds_chromeos_keyboard Kernel driver. See my patches to get this driver
+# into a custom Kernel as it is not included by default.
+# See https://github.com/longsleep/linux_patches/tree/pixel
+#
+# The backlight can only be changed as root, thus sudo is used in this script.
+# To make this work, add the following like to your sudoes file
+# ALL ALL = (ALL) NOPASSWD: /usr/bin/tee /sys/class/leds/chromeos\:\:kbd_backlight/brightness
+#
+# Thats it.
+#
+# This script was written by Simon Eisenmann <simon@longsleep.org> in 2015.
+
+
+if [ "$1" = "" ]; then
+    echo "$0 [on/off/toggle]"
+    exit 1
+fi
+
+MODE=$1
+DEVFILE=/sys/class/leds/chromeos\:\:kbd_backlight/brightness
+
+VALUE=0
+CURR=`cat $DEVFILE`
+
+if [ "$MODE"x == "on"x ]; then
+    VALUE=100
+fi
+
+if [ "$MODE"x == "toggle"x ]; then
+	if [ "$CURR" == "100" ]; then
+		VALUE=0
+	else
+		VALUE=100
+	fi
+fi
+
+
+echo $VALUE | sudo /usr/bin/tee $DEVFILE

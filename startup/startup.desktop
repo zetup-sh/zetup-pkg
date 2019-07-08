@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=sh /home/$(whoami)/computer-setup/startup/startup.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=docker-machine
+Name=docker-machine
+Comment[en_US]=
+Comment=

@@ -1,0 +1,7 @@
+tmux select-pane -t "2"
+tmux send-keys C-c
+tmux send-keys C-c
+tmux send-keys Up
+tmux send-keys "Enter"
+tmux select-pane -t "1"
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+git add . -A && 
+git commit --amend --no-edit && 
+git push origin $(
+if [ -z "$1" ] ; 
+then echo $1 ; 
+else echo master ; 
+fi
+) -f

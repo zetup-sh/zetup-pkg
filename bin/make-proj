@@ -1,0 +1,10 @@
+#!/bin/bash
+PROJ_NAME="$1"
+mkdir ~/dev/$PROJ_NAME
+cd ~/dev/$PROJ_NAME
+npm init -y
+git init
+echo "node_modules" > .gitignore
+git add . -A && git commit -m "initial commit"
+cd ~/dev
+dev "$PROJ_NAME"

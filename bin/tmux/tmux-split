@@ -1,0 +1,5 @@
+#!/bin/sh
+set -- $(stty size) # $1 = rows $2 = columns
+tmux split-window -v
+tmux resize-pane  -y "10"
+tmux select-pane -t "1"

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#copy this in a folder from path ex: /usr/local/bin
+#usage: docker-machine-rename default my-default
+
+# Authors
+#
+# alexproca initial script
+# eurythmia sed magic
+
+OLD_MACHINE_NAME=${1:-default};
+NEW_MACHINE_NAME=${2:-my-default-2};
+STORE_PATH=$(docker-machine inspect ${OLD_MACHINE_NAME} | sed -n 's/^ *"StorePath": "\(.*\)",/\1/p')
+
+# 1. rename the directory of your docker-machine from docker machine store
+mv "$STORE_PATH/machines/$OLD_MACHINE_NAME" "$STORE_PATH/machines/$NEW_MACHINE_NAME";
+
+# 2. update config.json with the new name and new path (always backup your configs)
+sed -i.bak "s/${OLD_MACHINE_NAME}/${NEW_MACHINE_NAME}/g" ${STORE_PATH}/machines/${NEW_MACHINE_NAME}/config.json
+
+# 3. rename machine in the virtual machine provider
+vboxmanage modifyvm "$OLD_MACHINE_NAME" --name "$NEW_MACHINE_NAME"

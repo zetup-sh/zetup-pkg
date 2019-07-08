@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Add this to startup applications to make it work automatically
+while sleep 1; do
+
+
+if grep -qFv "disconnected" /sys/class/drm/card0-DP-1/status;
+  then
+    xrandr -s 2560x1440 --output eDP1 --off;
+    xrandr -s 2560x1440 --output DP1 --primary --auto
+    xinput list | grep maXTouch | sed -r  's/.*id=([0-9]+).*/\1/' | while read -r line; do xinput disable "$line"; done;
+    pacmd set-default-sink "alsa_output.pci-0000_00_03.0.hdmi-stereo";
+    samus-alsaenable-speakers >/dev/null;
+  else
+    xrandr -s 2560x1700 --output eDP1 --auto
+    xinput list | grep maXTouch | sed -r  's/.*id=([0-9]+).*/\1/' | while read -r line; do xinput enable "$line"; done;
+    pacmd set-default-sink "alsa_output.platform-bdw-rt5677.analog-stereo";
+    samus-alsaenable-speakers >/dev/null;
+fi 
+done

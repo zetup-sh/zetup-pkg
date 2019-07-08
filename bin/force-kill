@@ -1,0 +1,5 @@
+#!/bin/bash
+# force kill process by port
+# Usage: "force-kill PORT"
+
+sudo netstat -tulnp | grep "$1" | sed -r -e "s/.*LISTEN\\s+([0-9]+).*/\1/" | xargs sudo kill -9

@@ -1,0 +1,8 @@
+:if filereadable($OVERRIDEDIR . "/vimrc")
+  exec "source" . $OVERRIDEDIR . "/vimrc"
+else
+  exec "source" . $DOTDIR . "/_vimrc"
+endif
+if filereadable("$CUSTOM/vimrc")
+  exec "source" . $CUSTOM . "/vimrc"
+endif

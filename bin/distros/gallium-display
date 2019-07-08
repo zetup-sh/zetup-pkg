@@ -1,0 +1,3 @@
+#!/bin/bash
+ xrandr -s 2560x1440 --output DP1 --primary --left-of eDP1 --auto
+

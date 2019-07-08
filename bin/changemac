@@ -1,0 +1,15 @@
+#!/bin/bash
+
+devname="$1"
+fakemac=$(sh ./spoofmac)
+echo "powering down $devname"
+ip link set dev $devname down
+sleep 1
+ip link show $devname
+echo "setting fake mac address $fakemac"
+ip link set dev $devname addr $fakemac
+echo "turning $devname back on"
+sleep 1
+ip link set dev $devname up
+sleep 1
+ip link show $devname

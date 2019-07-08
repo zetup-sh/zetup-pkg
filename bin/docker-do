@@ -1,0 +1,3 @@
+#!/bin/sh
+# --digitalocean-size s-8vcpu-32gb \
+docker-machine create --digitalocean-image ubuntu-18-04-x64 --driver digitalocean --digitalocean-access-token "$DOAT" "$1"

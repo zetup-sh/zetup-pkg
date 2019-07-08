@@ -1,0 +1,9 @@
+#!/bin/bash
+PS1='${PWD##*/} $ '
+echo "You can't just use finger guns as bash prompt."
+echo ""
+bn=$(basename $PWD)
+printf "%0.s " $(seq 1 ${#bn})
+echo -e " \xF0\x9F\x98\x8E  That's where you're wrong, kiddo     "
+PS1=$PS1$' \xF0\x9F\x91\x89\xF0\x9F\x91\x89 '
+PS1=$'${PWD##*/} \xF0\x9F\x91\x89\xF0\x9F\x98\x8E\xF0\x9F\x91\x89    '

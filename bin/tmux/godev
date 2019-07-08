@@ -1,0 +1,23 @@
+#!/bin/sh
+cd $HOME/go/src/gitlab.com/zwhitchcox
+PROJ="$1"
+set -- $(stty size) # $1 = rows $2 = columns
+tmux -2 new-session -d -s "$PROJ" -x "$2" -y "$(($1 - 1))"
+tmux split-window -t "$PROJ" -v
+tmux resize-pane -t "$PROJ" -y "10"
+tmux select-pane -t "1"
+tmux send-keys "cd $PROJ"
+tmux send-keys "Enter"
+tmux send-keys "vim"
+tmux send-keys "Enter"
+tmux select-pane -t "2"
+tmux send-keys "cd $PROJ"
+tmux send-keys "Enter"
+tmux send-keys "yarn dev:up"
+tmux send-keys "Enter"
+tmux select-pane -t "1"
+tmux new-window
+tmux send-keys "cd $PROJ"
+tmux send-keys "Enter"
+tmux previous-window
+tmux attach -t "$PROJ"
