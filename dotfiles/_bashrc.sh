@@ -29,7 +29,6 @@ if [ -f ~/.dir_colors/dircolors ]
 fi
 
 if [ -x "$(command -v docker-machine)" ]; then
-  echo "setting docker-machine prompt bash"
   source /etc/bash_completion.d/docker-machine-prompt.bash;
   PS1='${PWD##*/} $(__docker_machine_ps1 " [%s]")$ ';
 fi
