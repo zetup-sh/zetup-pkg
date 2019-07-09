@@ -42,6 +42,8 @@ Note: if you do adjust the `custom` or `override` directory, you will want to re
 
 The `init.sh` file is what is run in the `wget`, and the `setup.sh` is run after the `init.sh`.
 
+The dotfiles (aliases,fns.sh,vimrc,etc) are created with symbolic links to this directory (once you clone it), so you don't have to worry about copying files back and forth to update your configuration. Just `git pull` or `git push`.
+
 ### Make it your own
 
 I encourage you to fork this repo and make it your own. If you stick to the `custom` and `override` diretories, you can always pull from this repo for any updates (I periodically update versions of things, add functions, etc.), or you can push to this repo, and I might accept a PR. Or you can completely customize it and let other people use your configuration. It is quite easy to do just by forking and having multiple branches and origins. If you completely mess up, you can always come back here.
