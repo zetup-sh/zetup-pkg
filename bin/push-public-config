@@ -2,4 +2,4 @@
 cd ~/zetup
 git add . -A
 git commit -m "$1"
-git push public public"$1"
+git push public public
