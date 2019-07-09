@@ -52,7 +52,7 @@ If you do fork this repo and let others use your version, I would recommend havi
 
 ### some of the bins
 
-`./bin/spoofmac` changes your mac address to get around coffee shop wifi limitations mostly.
+`bin/spoofmac` changes your mac address to get around coffee shop wifi limitations mostly.
 
 `fingerguns` Changes your bash terminal to finger guns. Must be run with `source ~/zetup/bin/fingerguns`
 
