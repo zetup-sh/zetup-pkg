@@ -10,7 +10,6 @@ sh ./install/*.sh
 echo "Installing fonts"
 sh ./fonts.sh
 
-echo "Install the ui for your distro with sh ~/zetup/{YOUR_DISTRO}.sh"
 
 source ~/.bashrc
 
@@ -19,3 +18,5 @@ then sh $HOME/zetup/custom/setup.sh;
 fi
 
 echo 'All Done!'
+
+echo "Customize the ui with `sh ~/zetup/ui/xfce.sh` or `sh ~/zetup/ui/unity.sh` depending on your desktop environment"
