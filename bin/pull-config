@@ -1,3 +1,0 @@
-#!/bin/bash
-$(cd ~/dotfiles && git pull origin master)
-echo "Pulled from dotfiles master"
