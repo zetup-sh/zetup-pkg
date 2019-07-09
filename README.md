@@ -64,4 +64,4 @@ If you do fork this repo and let others use your version, I would recommend havi
 
   `gitamend` amends to your last commit changing the message if provided, but leaving the message as is otherwise
 
-  `gitpush" use all the time, it just adds everything in your current repository, removes everthing that was deleted, commits with your provided message, and pushes the current branch to `origin`
+  `gitpush` use all the time, it just adds everything in your current repository, removes everthing that was deleted, commits with your provided message, and pushes the current branch to `origin`
