@@ -19,14 +19,59 @@ These are files I want to use every time I move to a new machine (ubuntu & (wind
 
 If you run the above setup script, it prompts you for your username, email, and name and then installs many basic utilities (see ./init.sh) and then clones this repository and installs many development programs I use including the following:
 
-* docker
-* go
-* kubernetes
-* node
-* vim (builds from source to enable YouCompleteMe, which is a huge pain to install)
-* vlc
+### Development Tools
 
-It also does things like make the UI prettier, change the background, install development fonts, add a bunch of vim plugins, vimrc, a tmux config, etc.
+* docker
+  - docker-compose
+  - docker-machine
+  - virtualbox)
+* go
+  - creates source directories
+  - adds `go` to your path
+* kubernetes
+  - minikube
+* node
+  - yarn
+  - nvm (with latest node)
+  - globally: nodemon, typescript, webpack, jest, pm2 and ts-node
+* vim (builds from source to enable YouCompleteMe, which is a huge pain to install)
+  - many plugins and scripts (see `./dotfiles/vimrc`)
+  - plugin manager
+* vscode
+* many others
+  - tmux git cmake apt-transport-https curl ca-certificates software-properties-common google-chrome-stable xclip snapd ffmpeg vlc [doctl](https://github.com/digitalocean/doctl)
+
+
+### Fonts
+
+* Fira Coda
+* DejaVu
+* Source Code Pro
+* Hack
+* Hasklig
+
+
+### Overridable/extensible
+
+If you need to extend a file, simply put it in the `custom` directory. If you need to override a file, simply add it to the `override` directory
+
+* [aliases.sh](dotfiles/_aliases.sh): [bash aliases](https://www.tldp.org/LDP/abs/html/aliases.html) for convenience
+* [fns.sh](dotfiles/_fns.sh): [bash functions](https://linuxize.com/post/bash-functions/)
+* [bashrc.sh](dotfiles/_bashrc.sh): initialization script, does things like add scripts to path, set history size, enable bash autocompletion, changes to the `dev` directory, etc.
+* [tmux.conf](dotfiles/_tmux.conf): [tmux configuration file](https://github.com/tmux/tmux)
+* [vimrc](dotfiles/_vimrc): [vim run command](https://www.vim.org/)
+ 
+
+### UI
+
+You can run a UI customization script based on your desktop environment. This must be done manually.
+
+* [xfce](ui/xfce.sh): run `sh ui/xfce.sh`
+* [unity](ui/unity.sh): run `sh ui/unity.sh`
+
+This adds themes and sets the background:
+
+
 
 There are also a lot of aliases, funcions, and bash scripts in ./dotfiles/{_aliases.sh,_fns.sh,_bashrc.sh} and ./bin.
 

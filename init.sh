@@ -16,7 +16,6 @@ then echo "What is your username? Please use a consistent username with github/g
 else echo "Username is set to $username"
 fi
 
-
 find $HOME/zetup -type f -iname "*.sh" -exec chmod +x {} \;
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -24,6 +23,7 @@ echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sud
 
 sudo apt-get update
 sudo apt-get -y install tmux git cmake apt-transport-https curl ca-certificates software-properties-common google-chrome-stable xclip snapd
+
 
 xdg-settings set default-web-browser google-chrome.desktop
 
@@ -60,5 +60,4 @@ git clone git@gitlab.com:zwhitchcox/zetup.git $HOME/zetup
 cd $HOME/zetup
 mkdir ~/dev
 find . -maxdepth 1 -regextype posix-egrep -regex "\.\/\..*" ! -name .git -exec cp -t .. {} +
-sudo snap install yq code
 source setup.sh

@@ -9,4 +9,3 @@ for i in bashrc.sh aliases.sh fns.sh ;
     fi
     if [ -f "$CUSTOMDIR/$i" ] ; then source "$CUSTOMDIR/$i" ; fi
   done
-

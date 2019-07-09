@@ -13,10 +13,6 @@ export PATH=$PATH:$HOME/go/bin
 export GOPATH=$HOME/go
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-alias chrome="google-chrome-stable"
-alias fucking="sudo"
-alias ~~="cd $HOME/dev"
-alias get-pub="cat ~/.ssh/id_rsa.pub | xclip -selection c"
 export PATH="$PATH:/opt/yarn-0.22.0/bin"
 export EDITOR=vim
 export HISTSIZE=50000
@@ -33,15 +29,4 @@ if [ -x "$(command -v docker-machine)" ]; then
   PS1='${PWD##*/} $(__docker_machine_ps1 " [%s]")$ ';
 fi
 
-
-
 if [[ $HOME == "$(pwd)" ]]; then cd $HOME/dev ; fi
-
-if [ -d "$HOME/secrets" ]; then
-  export DOAT=$(cat ~/persomal/secrets.yml | yq r - doat)
-  export DOFP=$(cat ~/personal/secrets.yml | yq r - dofp)
-  export KEY_ID=$(cat ~/personal/secrets.yml | yq r - key_id)
-fi
-
-alias docker-stop-all-containers="docker stop \$(docker container ls -aq) && docker rm \$(docker container ls -aq)"
-alias docker-machine-unset="eval \\$(docker-machine env -u)"
