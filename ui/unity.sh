@@ -7,7 +7,7 @@ sudo apt install paper-icon-theme
 
 [ $(lsb_release -cs) == "bionic" ]  && sudo apt install gnome-tweak-tool
 [ $(lsb_release -cs) == "xenial" ]  && sudo apt install unity-tweak-tool
-
+sudo apt-get install gnome-shell-extensions
 
 # set the icon theme
 gsettings set org.gnome.desktop.interface icon-theme "Paper"
@@ -31,3 +31,4 @@ gsettings set org.gnome.desktop.wm.preferences theme macOS-5.0
 
 echo "You can tweak the ui with the Tweaks application."
 echo "More themes are available at https://www.gnome-look.org/browse/cat/135/ (just click on the theme you want, go to Files, and click install, then you can set it in the Tweaks Application"
+echo "You can set the terminal theme with \`get-theme\`, you can see what the themes look like at https://mayccoll.github.io/Gogh/"

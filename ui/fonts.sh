@@ -25,3 +25,12 @@ unzip Hasklig-1.1.zip -d hasklig
 cp -r hasklig /usr/share/fonts/ttf
 rm Hasklig-1.1.zip
 
+
+# fira sans
+wget https://github.com/bBoxType/FiraSans/archive/master.zip
+unzip master.zip
+sudo mkdir -p /usr/share/fonts/opentype/fira
+sudo mkdir -p /usr/share/fonts/truetype/fira
+sudo find FiraSans-master/ -name "*.otf" -exec cp {} /usr/share/fonts/opentype/fira/ \;
+sudo find FiraSans-master/ -name "*.ttf" -exec cp {} /usr/share/fonts/truetype/fira/ \;
+rm -r master.zip  FiraSans-master
