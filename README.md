@@ -60,8 +60,6 @@ If you do fork this repo and let others use your version, I would recommend havi
 
   `tmux-split` use this all the time, just splits a tmux terminal into one smaller window on bottom and one larger window on top.
 
-  `bin/distros` folder you can ignore...I should probably move that to my custom folder actually.
-
   `gitamend` amends to your last commit changing the message if provided, but leaving the message as is otherwise
 
-  `gitpush` use all the time, it just adds everything in your current repository, removes everthing that was deleted, commits with your provided message, and pushes the current branch to `origin`
+  `gitpush` I use all the time, it just adds everything in your current repository, removes everthing that was deleted, commits with your provided message, and pushes the current branch to `origin`
