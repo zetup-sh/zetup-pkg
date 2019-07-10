@@ -36,7 +36,7 @@ Plug 'fatih/molokai'
 Plug 'galooshi/vim-import-js'
 Plug 'scrooloose/nerdcommenter'
 Plug 'lifepillar/pgsql.vim'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 " Persistent Undo

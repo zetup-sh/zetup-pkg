@@ -36,5 +36,5 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +GoInstallBinaries +qa
 cd $HOME/.vim/bundle/YouCompleteMe
 ./install.py --js-completer --go-completer
-cd $HOME/dotfiles
+cd $HOME/zetup
 cp -r UltiSnips $HOME/.vim

@@ -13,5 +13,6 @@ sudo apt-get update && sudo apt-get install yarn -y --no-install-recommends
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install "$NVM_VERSION"
+nvm use "$NVM_VERSION"
 
 npm i -g ts-node nodemon typescript webpack jest pm2
