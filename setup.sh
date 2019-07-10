@@ -11,7 +11,7 @@ done
 
 bash $HOME/zetup/ui.sh;
 
-cp -r $HOME/startup/zetup.desktop $HOME/.config/autostart
+cp -r $HOME/zetup/startup/zetup.desktop $HOME/.config/autostart
 
 source $HOME/.bashrc
 
