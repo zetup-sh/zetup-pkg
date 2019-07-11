@@ -1,35 +1,62 @@
 #!/bin/bash
-sleep 1
-
-if [ -z "$name" ];
-then echo "What is your full name?" && read name;
-else echo "Name is set to $name";
+if [ -z $INCONTAINER ]
+  then sleep 1 # idk why, but it doesn't work without this
 fi
 
-if [ -z "$email" ];
-then echo "What is your email?" && read email;
-else echo "Email is set to $email";
+mustopen() {
+  if [ -z $IN_CONTAINER ]
+    then
+      echo "Please open $1 in your browser and create a personal access token with the following scope:"
+      echo repo
+      echo admin:public_key
+      echo user
+      echo
+      echo then paste the access key here:
+      read ZETUP_GITHUB_KEY
+  else
+    if [ -x "$(command -v sensible-browser)" ]
+      then sensible-browser $1;
+    elif [ -x "$(command -v xdg-open)" ]
+      then xdg-open $1;
+    else
+      sudo apt update && sudo apt install -y sensible-browser && sensible-browser $1;
+      if [ ! -x "$(command -v sensible-browser)" ]
+        then
+          echo "could not locate or install a browser"
+          exit 1
+      fi
+    fi
+  fi
+}
+
+
+# TODO gitlab support
+if [ ! -z $ZETUP_GITHUB_KEY ];
+  mustopen https://github.com/settings/tokens/new
+  
+# general user info
+if [ -z "$NAME" ];
+then echo "What is your full name?" && read NAME;
+else echo "Name is set to $NAME";
 fi
 
-if [ -z "$username" ];
-then echo "What is your username? Please use a consistent username with github/gitlab, npm, etc."  && read username;
-else echo "Username is set to $username"
+if [ -z "$EMAIL" ];
+then echo "What is your email?" && read EMAIL;
+else echo "Email is set to $EMAIL";
 fi
 
-find $HOME/zetup -type f -iname "*.sh" -exec chmod +x {} \;
+if [ -z "$USERNAME" ];
+then echo "What is your username? Please use a consistent username with github/gitlab, npm, etc."  && read USERNAME;
+else echo "Username is set to $USERNAME"
+fi
 
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
+# generate ssh key and add to github
 sudo apt-get update
-sudo apt-get -y install tmux git cmake apt-transport-https curl ca-certificates software-properties-common google-chrome-stable xclip snapd
-
-
-xdg-settings set default-web-browser google-chrome.desktop
-
-git config --global user.name "$name"
-git config --global user.email "$email"
-git config --global core.editor vim
+sudo apt install -y \
+  git \
+  xclip
+git config --global user.name "$NAME"
+git config --global user.email "$EMAIL"
 if [ ! -f ~/.ssh/id_rsa ]; then
   ssh-keygen -t rsa -b 4096 -C "$email" -f ~/.ssh/id_rsa -N ""
 fi
@@ -37,27 +64,57 @@ eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
 echo;
 if $IN_CONTAINER ; 
-then echo copy this key and paste it into your github/gitlab account
-cat ~/.ssh/id_rsa.pub
-echo https://gitlab.com/profile/keys  https://github.com/settings/ssh/new ;
-else 
-echo "Your github and/or gitlab key has been copied to your clipboard. Paste it into your account in the new browser window. Please create an account if you don't already have one."
-echo
-cat ~/.ssh/id_rsa.pub | xclip -selection c
-echo
-echo
-echo
-google-chrome https://gitlab.com/profile/keys  https://github.com/settings/ssh/new ;
-
+  then
+    echo copy this key and paste it into your github/gitlab account
+    cat ~/.ssh/id_rsa.pub
+    echo https://gitlab.com/profile/keys  https://github.com/settings/ssh/new ;
+  else 
+    cat ~/.ssh/id_rsa.pub | xclip -selection c
+    echo
+    echo "Your github and/or gitlab key was automatically copied to your clipboard."
+    echo "Paste it into your account in the new browser window."
+    echo "Please create an account if you don't already have one."
+    echo
+    google-chrome https://gitlab.com/profile/keys  https://github.com/settings/ssh/new ;
 fi
+echo
+echo
+echo
+read -p  "Press enter once you have added the keys to your account "
+echo
 
-echo;
-read -p  "Press enter continue: "
-echo;
+# install chrome and make it the default browser
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt install -yqq google-chrome-stable
+xdg-settings set default-web-browser google-chrome.desktop
+
+# general essential utilities
+sudo apt install -y \
+  install \
+  tmux \
+  cmake \
+  apt-transport-https \
+  curl \
+  ca-certificates \
+  software-properties-common \
+  google-chrome-stable \
+  xclip \
+  snapd \
+  sensible-browser
+  
+
+
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
-git clone git@gitlab.com:zwhitchcox/zetup.git $HOME/zetup
-cd $HOME/zetup
+
+git clone "https://github.com/zwhitchcox/zetup.git" $HOME/zetup 
+# uncomment the below line and comment the above line to use your own repo
+#git clone "git@github.com/$USERNAME/zetup.git" $HOME/zetup 
+cd $HOME/dotfiles
+cp -r .bin ~/.bin
 mkdir ~/dev
 find . -maxdepth 1 -regextype posix-egrep -regex "\.\/\..*" ! -name .git -exec cp -t .. {} +
+sed -i "1s/^export username=$USERNAME/\n/" ~/.bashrc
+snap install yq
 source setup.sh
