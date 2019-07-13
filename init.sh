@@ -47,7 +47,7 @@ cat ~/.ssh/id_rsa.pub | xclip -selection c
 echo
 echo
 echo
-google-chrome https://gitlab.com/profile/keys  https://github.com/settings/ssh/new ;
+google-chrome  https://github.com/settings/ssh/new ;
 
 fi
 
@@ -56,7 +56,7 @@ read -p  "Press enter continue: "
 echo;
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
-git clone git@gitlab.com:zwhitchcox/zetup.git $HOME/zetup
+git clone git@github.com:zwhitchcox/zetup.git $HOME/zetup
 cd $HOME/zetup
 mkdir ~/dev
 find . -maxdepth 1 -regextype posix-egrep -regex "\.\/\..*" ! -name .git -exec cp -t .. {} +
