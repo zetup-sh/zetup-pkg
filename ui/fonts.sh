@@ -3,8 +3,8 @@
 mkdir -p /usr/share/fonts/ttf
 
 # fira code
-sudo apt install fonts-firacode
-sudo apt install ttf-dejavu
+sudo apt install fonts-firacode -y
+sudo apt install ttf-dejavu -y
 
 # source code pro
 [ -d /usr/share/fonts/opentype ] || mkdir /usr/share/fonts/opentype
