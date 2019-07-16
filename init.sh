@@ -82,6 +82,10 @@ echo
 echo
 read -p  "Press enter once you have added the keys to your account "
 echo
+<<<<<<< HEAD
+=======
+google-chrome  https://github.com/settings/ssh/new ;
+>>>>>>> public
 
 # install chrome and make it the default browser
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -107,12 +111,17 @@ sudo apt install -y \
 
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
+<<<<<<< HEAD
 
 git clone "https://github.com/zwhitchcox/zetup.git" $HOME/zetup 
 # uncomment the below line and comment the above line to use your own repo
 #git clone "git@github.com/$USERNAME/zetup.git" $HOME/zetup 
 cd $HOME/dotfiles
 cp -r .bin ~/.bin
+=======
+git clone git@github.com:zwhitchcox/zetup.git $HOME/zetup
+cd $HOME/zetup
+>>>>>>> public
 mkdir ~/dev
 find . -maxdepth 1 -regextype posix-egrep -regex "\.\/\..*" ! -name .git -exec cp -t .. {} +
 sed -i "1s/^export username=$USERNAME/\n/" ~/.bashrc

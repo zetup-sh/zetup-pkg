@@ -1,0 +1,10 @@
+#!/bin/bash
+cd $HOME/zetup
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ "$BRANCH" != "private"  || "$BRANCH" != "public" ]]; then
+  echo 'Zetup is not on private or public branch'
+  echo 'You can change zetup to a private or public branch with  `zetprivate` or `zetpublic`'
+  exit 1
+fi
+git pull $BRANCH $BRANCH
+echo "Pulled from zetup $BRANCH"

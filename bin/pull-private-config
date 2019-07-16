@@ -1,3 +1,0 @@
-#!/bin/bash
-$(cd ~/zetup && git pull private private)
-echo "Pulled from zetup private"
