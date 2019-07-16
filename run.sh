@@ -4,7 +4,7 @@ if [ -z $INCONTAINER ]
 fi
 
 mustopen() {
-  if [ -z $IN_CONTAINER ]
+  if [ ! -z $IN_CONTAINER ]
     then
       echo "Please open $1 in your browser and create a personal access token with the following scope:"
       echo repo
@@ -15,7 +15,9 @@ mustopen() {
       read ZETUP_GITHUB_KEY
   else
     if [ -x "$(command -v sensible-browser)" ]
-      then sensible-browser $1;
+      then
+        echo using sensible browser
+        sensible-browser $1
     elif [ -x "$(command -v xdg-open)" ]
       then xdg-open $1;
     else
@@ -31,8 +33,36 @@ mustopen() {
 
 
 # TODO gitlab support
-if [ ! -z $ZETUP_GITHUB_KEY ];
-  mustopen https://github.com/settings/tokens/new
+if [ -z $ZETUP_GITHUB_PAT ];
+  then
+    echo "ZETUP_GITHUB_PAT not set. Please create a personal access token with all privileges enabled"
+    mustopen https://github.com/settings/tokens/new
+  else
+    echo "using \$ZETUP_GITHUB_PAT"
+fi
+if [ ! -x "$(command -v jq)" ]
+then
+sudo snap install jq
+fi
+
+username=$(curl -s -H "Authorization: token $ZETUP_GITHUB_PAT" https://api.github.com/user | jq -r ".login")
+git ls-remote "git@github.com:$username/zetup-private.git" -q
+
+if [ $? = 0 ]
+then
+  public_exists=true
+else
+  public_exists=false
+fi
+
+echo $public_exists
+
+
+
+
+exit
+
+
   
 # general user info
 if [ -z "$NAME" ];
@@ -45,8 +75,8 @@ then echo "What is your email?" && read EMAIL;
 else echo "Email is set to $EMAIL";
 fi
 
-if [ -z "$USERNAME" ];
-then echo "What is your username? Please use a consistent username with github/gitlab, npm, etc."  && read USERNAME;
+if [ -z "$GITHUB_USERNAME" ];
+then echo "\$GITHUB_USERNAME not set. What is your github username?"  && read USERNAME;
 else echo "Username is set to $USERNAME"
 fi
 
@@ -82,10 +112,6 @@ echo
 echo
 read -p  "Press enter once you have added the keys to your account "
 echo
-<<<<<<< HEAD
-=======
-google-chrome  https://github.com/settings/ssh/new ;
->>>>>>> public
 
 # install chrome and make it the default browser
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -111,17 +137,14 @@ sudo apt install -y \
 
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
-<<<<<<< HEAD
 
 git clone "https://github.com/zwhitchcox/zetup.git" $HOME/zetup 
 # uncomment the below line and comment the above line to use your own repo
 #git clone "git@github.com/$USERNAME/zetup.git" $HOME/zetup 
 cd $HOME/dotfiles
 cp -r .bin ~/.bin
-=======
 git clone git@github.com:zwhitchcox/zetup.git $HOME/zetup
 cd $HOME/zetup
->>>>>>> public
 mkdir ~/dev
 find . -maxdepth 1 -regextype posix-egrep -regex "\.\/\..*" ! -name .git -exec cp -t .. {} +
 sed -i "1s/^export username=$USERNAME/\n/" ~/.bashrc

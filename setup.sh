@@ -2,14 +2,16 @@
 
 
 echo "Linking dotfiles"
-bash ./link-dotfiles.sh
+sh ./link-dotfiles.sh
 
 echo "Installing programs"
 for i in $(ls ~/zetup/install);
-do  bash $HOME/install/$i ;
+do  sh $HOME/install/$i ;
 done
 
-bash $HOME/zetup/ui.sh;
+sh $HOME/zetup/ui.sh;
+
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'virtualbox.desktop']"
 
 cp -r $HOME/zetup/startup/zetup.desktop $HOME/.config/autostart
 
