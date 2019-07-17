@@ -1,7 +1,3 @@
 [user]
-	email = zwhitchcox@gmail.com
 	name = Zane Hitchcox
-[push]
-  default = current 
-[core]
-	editor = vim
+	email = zwhitchcox@gmail.com
