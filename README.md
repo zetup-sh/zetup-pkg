@@ -2,15 +2,15 @@
 
 ### To Run
 
-`wget https://github.com/zwhitchcox/zetup/raw/public/init.sh && source init.sh`
+`wget https://github.com/zwhitchcox/zetup/raw/public/run.sh && source run.sh`
 
 OR
 
-`curl https://github.com/zwhitchcox/zetup/raw/public/init.sh && source init.sh`
+`curl https://github.com/zwhitchcox/zetup/raw/public/run.sh && source run.sh`
 
 ### within container
 
-`apt update && apt install wget -y && wget https://github.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
+`apt update && apt install wget -y && wget https://github.com/zwhitchcox/zetup/raw/public/run.sh && source run.sh`
 
 
 ## What is this?
@@ -57,9 +57,9 @@ If you need to extend a file, simply put it in the `custom` directory. If you ne
 
 * [aliases.sh](dotfiles/_aliases.sh): [bash aliases](https://www.tldp.org/LDP/abs/html/aliases.html) for convenience
 * [fns.sh](dotfiles/_fns.sh): [bash functions](https://linuxize.com/post/bash-functions/)
-* [bashrc.sh](dotfiles/_bashrc.sh): initialization script, does things like add scripts to path, set history size, enable bash autocompletion, changes to the `dev` directory, etc.
-* [tmux.conf](dotfiles/_tmux.conf): [tmux configuration file](https://github.com/tmux/tmux)
-* [vimrc](dotfiles/_vimrc): [vim run command](https://www.vim.org/)
+* [.bashrc](dotfiles/_bashrc.sh): initialization script, does things like add scripts to path, set history size, enable bash autocompletion, changes to the `dev` directory, etc.
+* [.tmux.conf](dotfiles/_tmux.conf): [tmux configuration file](https://github.com/tmux/tmux)
+* [.vimrc](dotfiles/_vimrc): [vim run command](https://www.vim.org/)
  
 
 ### UI

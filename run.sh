@@ -46,7 +46,7 @@ sudo snap install jq
 fi
 
 username=$(curl -s -H "Authorization: token $ZETUP_GITHUB_PAT" https://api.github.com/user | jq -r ".login")
-git ls-remote "git@github.com:$username/zetup-private.git" -q
+git ls-remote "git@github.com:$username/zetup.git" -q
 
 if [ $? = 0 ]
 then

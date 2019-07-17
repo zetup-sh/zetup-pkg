@@ -6,3 +6,6 @@
 # usermod -a -G chsh $(whoami)
 # chsh -s $(which zsh) $(whoami)
 # ln -s ~/zetup/zshrc.zsh ~/.zshrc
+
+gsettings get org.gnome.shell favorite-apps > $HOME/.favorites.bak
+gsettings set org.gnome.shell favorite-apps "$(cat $CUSTOMDIR/favorites.txt)"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# for development purposes
+export ZETUP_GITHUB_PAT=$(cat $HOME/.pat)
