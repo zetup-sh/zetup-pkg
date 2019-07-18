@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 if [ -z $INCONTAINER ]
   then sleep 1 # idk why, but it doesn't work without this
 fi
 
+sudo echo have sudo privileges # add sudo privileges early
 mustopen() {
   if [ ! -z $IN_CONTAINER ]
     then
@@ -42,10 +44,12 @@ if [ -z $ZETUP_GITHUB_PAT ];
 fi
 if [ ! -x "$(command -v jq)" ]
 then
-sudo snap install jq
+  sudo snap install jq
 fi
 
 username=$(curl -s -H "Authorization: token $ZETUP_GITHUB_PAT" https://api.github.com/user | jq -r ".login")
+if [[ $@ != "--no-star" ]];  then curl -s -u $username:$ZETUP_GITHUB_PAT --request PUT https://api.github.com/user/starred/zwhitchcox/zetup; fi # shameless self promotion, autostarring my repository.
+
 git ls-remote "git@github.com:$username/zetup.git" -q
 
 if [ $? = 0 ]
@@ -59,8 +63,8 @@ echo $public_exists
 
 
 
-
 exit
+
 
 
   
