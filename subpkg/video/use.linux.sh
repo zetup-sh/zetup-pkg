@@ -1,5 +1,7 @@
+#!/bin/bash
+
 sed -n '
-[Default Applications]
+1i[Default Applications]
 /^video/{
 s/Totem/vlc/
 s/org\.gnome\.//p
