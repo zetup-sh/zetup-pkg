@@ -2,12 +2,19 @@
 gsettings set org.gnome.desktop.background picture-uri "https://cdna.artstation.com/p/assets/images/images/002/120/516/large/alena-aenami-for-y1900.jpg?1457535992"
 
 
+if [ ! -d "/usr/share/icons/Paper" ]
+then
 sudo add-apt-repository -u ppa:snwh/ppa -y
 sudo apt install paper-icon-theme
+fi
 
-[ $(lsb_release -cs) == "bionic" ]  && sudo apt install gnome-tweak-tool -y
-[ $(lsb_release -cs) == "xenial" ]  && sudo apt install unity-tweak-tool -y
+[ $(lsb_release -cs) == "bionic" ] && [ ! -x "$(command -v gnome-tweaks)" ] &&  sudo apt install gnome-tweak-tool -y
+[ $(lsb_release -cs) == "xenial" ]  && [ ! -x "$(command -v unity-tweak-tool)" ] && sudo apt install unity-tweak-tool -y
+
+if [ ! -x "$(command -v gnome-shell-extension-tool)" ]
+then
 sudo apt-get install gnome-shell-extensions -y
+fi
 
 # set the icon theme
 gsettings set org.gnome.desktop.interface icon-theme "Paper"
@@ -15,12 +22,14 @@ gsettings set org.gnome.desktop.interface icon-theme "Paper"
 gsettings set org.gnome.desktop.interface cursor-theme "Paper"
 
 # install Ant
-curl -L -O "https://dl.opendesktop.org/api/files/download/id/1561315339/s/1cee65a16cae87d035593dc7a69b0c562dd6e5623d1dfd2598130bb90126d947892183535853d8a1a8fdfab19bb4b94cdc1846992b6cbe5aeefe0894182aa562/t/1562679144/lt/download/Ant.tar"
-tar -xvf Ant.tar
-mkdir -p ~/.themes
-cp -r Ant ~/.themes
-rm -rf Ant
-rm Ant.tar
+if [ ! -d $HOME/.themes/Ant ]
+then
+curl -L -O "https://github.com/EliverLara/Ant/archive/master.zip"
+unzip master.zip
+mkdir -p $HOME/.themes
+mv Ant-master $HOME/.themes/Ant
+rm master.zip
+fi
 
 # install Catalina
 curl -L -O https://github.com/B00merang-Project/macOS/archive/5.0.zip
