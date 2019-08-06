@@ -1,0 +1,40 @@
+#!/bin/bash
+
+sudo snap install --classic code
+code --install-extension Shan.code-settings-sync
+code --install-extension ms-vscode.cpptools
+code --install-extension ginfuru.ginfuru-better-solarized-dark-theme
+code --install-extension ms-vscode.Go
+code --install-extension zwhitchcox.graphql-authorization-and-validation-directives-highlighting
+code --install-extension kumar-harsh.graphql-for-vscode
+code --install-extension devine-davies.make-hidden
+code --install-extension yzhang.markdown-all-in-one
+code --install-extension shd101wyy.markdown-preview-enhanced
+code --install-extension sdras.night-owl
+code --install-extension June07.nims
+code --install-extension liviuschera.noctis
+code --install-extension arcticicestudio.nord-visual-studio-code
+code --install-extension ms-vscode.powershell
+code --install-extension daylerees.rainglow
+code --install-extension rust-lang.rust
+code --install-extension scala-lang.scala
+code --install-extension ahmadawais.shades-of-purple
+code --install-extension ryanolsonx.solarized
+code --install-extension bbrakenhoff.solarized-light-custom
+code --install-extension wesbos.theme-cobalt2
+code --install-extension eamodio.toggle-excluded-files
+code --install-extension Gruntfuggly.triggertaskonsave
+code --install-extension vscodevim.vim
+code --install-extension zwhitchcox.vs-code-extension-toggle-graphql-validation-directives
+code --install-extension andreweinand.vscode-auto-attach
+code --install-extension slevesque.vscode-autohotkey
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension NuclleaR.vscode-extension-auto-import
+code --install-extension dabbott.vscode-import-js
+code --install-extension wangtao0101.vscode-js-import
+code --install-extension jtr.vscode-position
+code --install-extension wayou.vscode-todo-highlight
+code --install-extension ms-vscode.vscode-typescript-tslint-plugin
+code --install-extension johnpapa.winteriscoming
+code --install-extension zwhitchcox.zwhitchcox-better-solarized-dark-theme

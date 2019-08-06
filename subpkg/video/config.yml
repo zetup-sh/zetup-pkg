@@ -1,0 +1,5 @@
+apt:
+  - vlc
+  - ppa: jonathonf/ffmpeg-4
+    name: ffmpeg
+
