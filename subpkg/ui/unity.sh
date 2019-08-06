@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# unity or gnome, really
 gsettings set org.gnome.desktop.background picture-uri "https://cdna.artstation.com/p/assets/images/images/002/120/516/large/alena-aenami-for-y1900.jpg?1457535992"
 
 
