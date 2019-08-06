@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=sh /home/$(whoami)/zetup/startup/startup.sh
+Exec=bash /home/$(whoami)/zetup/startup/startup.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true

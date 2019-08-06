@@ -1,8 +1,321 @@
-:if filereadable($OVERRIDEDIR . "/vimrc")
-  exec "source" . $OVERRIDEDIR . "/vimrc"
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+nnoremap J <C-w>hjo
+nnoremap K <C-w>hko
+
+call plug#begin('~/.vim/bundle')
+Plug 'junegunn/vim-easy-align'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'henrik/vim-indexed-search'
+Plug 'pangloss/vim-javascript'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/Comceal'
+Plug 'vim-syntastic/syntastic'
+Plug 'kshenoy/vim-signature'
+Plug 'tpope/vim-fugitive'
+Plug 'easymotion/vim-easymotion'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'Quramy/vim-dtsm'
+Plug 'mhartington/vim-typings'
+Plug 'chemzqm/vim-jsx-improve'
+Plug 'zwhitchcox/grep.vim'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'SirVer/ultisnips'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'fatih/molokai'
+Plug 'galooshi/vim-import-js'
+Plug 'scrooloose/nerdcommenter'
+Plug 'lifepillar/pgsql.vim'
+Plug 'Valloric/YouCompleteMe'
+call plug#end()
+
+" Persistent Undo
+set undofile 
+set undodir=~/.vim/undodir
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+let myUndoDir = expand(vimDir . '/undodir')
+" Create dirs
+call system('mkdir ' . vimDir)
+call system('mkdir ' . myUndoDir)
+let &undodir = myUndoDir
+set undofile
+endif
+au BufRead,BufNewFile *.css setfiletype scss
+if (has("autocmd"))
+au BufReadPost * if line("'\"") > 1 && line("'\"") < line("$") | exe "normal! g'\"" | endif
+endif
+"au BufRead,BufNewFile NERD_tree_1 
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+noremap <C-S> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
+let NERDTreeIgnore = ['node_modules','vendor', 'bower_components', '.git', 'npm-debug.log', 'elm-stuff', 'package-lock.json', 'yarn.lock', 'build', 'Gopkg.toml', 'Gopkg.lock']
+"switch between nerdtree and file
+execute "set <M-h>=\eh"
+nnoremap <M-h> <C-w>h
+execute "set <M-l>=\el"
+nnoremap <M-l> <C-w>l
+
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
+let mapleader=","
+" expansions
+set matchpairs+=<:>
+inoremap ><Tab> ><Esc>%lvey%%a</<C-r>"><Esc>%i
+inoremap ><Tab><Tab> ><Esc>%lvey%%a<CR></<C-r>"><Esc>O
+inoremap {<Tab> {}<Left>
+inoremap {<Tab><Tab> {<CR>}<Esc>O
+inoremap [<Tab> []<Left>
+inoremap [<Tab><Tab> [<CR>]<Esc>O<Tab>
+inoremap (<Tab> ()<Left>
+inoremap (<Tab><Tab> (<CR>)<Esc>O<Tab>
+inoremap ({<Tab> ({})<Left>
+inoremap ({<Tab><Tab> ({<CR>})<Esc>O<Tab>
+inoremap <C-u> <Esc>O<Tab>
+inoremap <C-h> <Esc>jA
+nnoremap p p=`]$
+nnoremap <Leader>{} A {<Esc>jo}<Esc>O
+
+
+nnoremap _p :set paste<CR>"+p:set nopaste<CR>
+nnoremap _P :set paste<CR>"+P:set nopaste<CR>
+vnoremap _p d:set paste<CR>"+P:set nopaste<CR>
+vnoremap _P d:set paste<CR>"+P:set nopaste<CR>
+vnoremap _y "+y
+
+" console.log
+au FileType javascript inoremap <buffer> <Leader>log <Esc>vBcconsole.log('<C-r>"', <C-r>")
+au FileType javascript inoremap <buffer> <Leader>strlog <Esc>vBcconsole.log('<C-r>"', JSON.stringify(<C-r>"))
+au FileType javascript inoremap <buffer> <Leader>slog <Esc>vBcconsole.log('<C-r>"')
+au FileType javascript inoremap <buffer> <Leader>llog <Esc>v^cconsole.log('<C-r>"', <C-r>")
+au FileType javascript nnoremap <buffer> <Leader>llog <Esc>$v^cconsole.log('<C-r>"', <C-r>")
+au FileType javascript nnoremap <buffer> <Leader>log o<C-r>"<Leader>log<Esc>=]`$
+au FileType javascript vnoremap <buffer> <Leader>log sconsole.log('<C-r>"', <C-r>")
+au FileType javascript vnoremap <buffer> <Leader>ilog s(function() {console.log('<C-r>"', <C-r>"); return <C-r>"})()
+
+
+autocmd FileType javascript nnoremap <buffer> <Leader>i <Esc>:ImportJSFix<CR>
+
+" JSON.stringify
+au FileType javascript vnoremap <buffer> <Leader>str sJSON.stringify(<C-r>")
+
+" snippets
+au FileType javascript nnoremap <buffer> <Leader>iife i;(() => {<CR>})()<Esc>O
+au FileType javascript nnoremap <buffer> <Leader>aiife i;(async () => {<CR>})()<Esc>O
+au FileType javascript inoremap <buffer> <Leader>cf <Esc>vbcfunction <C-r>"() {<CR>}<Esc>O
+au FileType javascript inoremap <buffer> <Leader>cc <Esc>vbcclass <C-r>" {<CR>}<Esc>O
+au FileType javascript inoremap <buffer> <Leader>crc <Esc>vbcclass <C-r>" extends Component {<CR>}<Esc>Orender() {<CR>}<Esc>Oreturn <div></div><Esc>F<i
+au FileType javascript inoremap <buffer> <Leader>iter <Esc>vbcfor (const key in <C-r>") {<CR>}<Esc>Oconst prop = <C-r>"<CR>
+
+
+
+
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>sv :w<CR>:source $MYVIMRC<CR>
+nnoremap <leader>run :!node script<CR>
+
+
+au FileType js inoremap fn( function(
+au FileType js inoremap fn<Space> function<Space>
+
+
+" for window navigation on chromebook
+map <C-A-w> <C-w>
+
+
+" preferences
+set tabstop=2
+set softtabstop=2
+set expandtab
+set autoindent
+set nu
+set noswapfile
+" don't skip line breaks when going up or down
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" File Navigation
+execute "set <M-n>=\en"
+noremap <M-n> :bn<CR>
+
+noremap <M-p> :bp<CR>
+nnoremap <Down> L5j
+
+nnoremap <Left> :bp<CR>
+nnoremap <Right> :bn<CR>
+
+
+if exists('+autochdir')
+  set autochdir
 else
-  exec "source" . $DOTDIR . "/_vimrc"
+  autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 endif
-if filereadable("$CUSTOM/vimrc")
-  exec "source" . $CUSTOM . "/vimrc"
-endif
+
+
+
+" set colors
+"syntax on
+"if !has("gui_running")
+"  set term=xterm
+"  set t_Co=256
+"  set t_ut=
+"  let &t_AB="\e[48;5;%dm"
+"  let &t_AF="\e[38;5;%dm"
+"  colorscheme solarized
+"  set background=light
+"endif
+"set backspace=indent,eol,start
+
+nnoremap ,q <Esc>:q<CR>
+nnoremap <C-Up> <C-w><Right>H8k<C-w><Left>
+nnoremap <C-Down> <C-w><Right>L8j<C-w><Left>
+" Send more characters for redraws
+set ttyfast
+
+" Enable mouse use in all modes
+set mouse=v
+
+" Set this to the name of your terminal that supports mouse codes.
+" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+set ttymouse=xterm2
+
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+inoremap jk <Esc>
+
+nnoremap ,n :set nopaste<CR>
+nnoremap ,p :set paste<CR>
+nnoremap <Leader>i ddO
+
+nnoremap <C-x> <C-w>
+
+" write the file when you accidentally opened it without the right (root) privileges
+cmap w!! w !sudo tee % > /dev/null
+silent execute "!stty -ixon"
+let s:prevcountcache=[[], 0]
+set ruler
+au BufRead,BufNewFile * set shiftwidth=2
+set shiftwidth=2
+set incsearch
+map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-from=exclude.list . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+
+
+fun! GlobalSearch(term)
+  if (exists("b:NERDTree"))
+    let a:path =  join(g:NERDTreeFileNode.GetSelected()['path']['pathSegments'], " ") 
+  else
+    let a:path = join(split(expand("%:p"), "/"), " ")
+  endif
+  let a:root = system("get-root " . a:path)
+  exec  "Rgrep " . a:term . " --startdir " . a:root . " *"
+endfun
+command! -nargs=1 GlobalSearch call GlobalSearch(<f-args>)
+fun! GitPush(message)
+  echom system("cd ~/dev/obdb && gitpush " . a:message)
+  exec "redraw!"
+endfun
+command! -nargs=1 GitPush call GitPush(<f-args>)
+fun! PushConfig(message) 
+  echom system("push-config " . "\"" . message . "\"")
+endfun
+command! -nargs=1 PushConfig call PushConfig(<f-args>)
+
+fun! RemoveAllConsoleLogs()
+  silent! exec "%s/\\s*console\\.log([^)]*)\\s*$\\n//g"
+  silent! exec "%s/\\s*console\\.log([^)]*)\\s*//g"
+endfun
+command! RemoveAllConsoleLogs call RemoveAllConsoleLogs()
+
+let Grep_Skip_Dirs="node_modules .git dist"
+let Grep_Skip_files="*.min.*"
+set backspace=2 " make backspace work like most other programs
+
+
+set autowrite
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+inoremap <C-c> <Esc>
+
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+let g:go_list_type = "quickfix"
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+
+" :GoAlternate  commands :A, :AV, :AS and :AT
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+
+autocmd FileType go nnoremap <Leader>d :GoDecls<CR>
+autocmd FileType go nnoremap <Leader>D :GoDeclsDir<CR>
+" :GoDef but opens in a vertical split
+autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+" :GoDef but opens in a horizontal split
+autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+
+let g:go_auto_type_info = 1
+set updatetime=800
+let g:go_auto_sameids = 0
+
+autocmd BufRead '$HOME/go/src/*.go'
+      \  let s:tmp = matchlist(expand('%:p'),
+      \ $HOME/go/src/\(github.com/Massad/[^/]\+\)')
+      \| if len(s:tmp) > 1 |  exe 'silent :GoGuruScope ' . s:tmp[1] | endif
+      \| unlet s:tmp
+let g:sql_type_default = 'pgsql'
+
+set tabstop=2
+set statusline+=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+
+nnoremap <Leader>g :silent exec "!runapp"<CR>:redraw!<CR>
+nnoremap <Leader>_ mzggOimport _ from 'lodash'<Esc>'zmz
+

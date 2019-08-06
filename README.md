@@ -8,10 +8,6 @@ OR
 
 `curl https://github.com/zwhitchcox/zetup/raw/public/init.sh && source init.sh`
 
-### within container
-
-`apt update && apt install wget -y && wget https://github.com/zwhitchcox/zetup/raw/master/init.sh && source init.sh`
-
 
 ## What is this?
 
