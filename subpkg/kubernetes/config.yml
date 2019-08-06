@@ -1,0 +1,9 @@
+snap:
+  kubectl
+  minikube
+brew:
+  kubernetes-cli
+  brew cask install minikube
+choco:
+  kubernetes-cli
+  minikube

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install if it's not already installed
-if [ -x "$(command -v go)" ]
+if [ ! -x "$(command -v go)" ]
 then
 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 wget https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz

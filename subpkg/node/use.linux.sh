@@ -1,8 +1,8 @@
-# #!/bin/bash
+#!/bin/bash
 
 # install nvm if not already
 NVM_DIR="$HOME/.nvm"
-if [ -x "$(command -v nvm)" ]
+if [ ! -d "$NVM_DIR" ]
 then
 NVM_VERSION="v12.4.0"
 mkdir $HOME/.nvm
@@ -12,7 +12,7 @@ fi
 
 
 # install node if not already
-if [ -x "$(command -v node)" ]
+if [ ! -x "$(command -v node)" ]
 then
 nvm install node
 sudo ln -s $(which npm) /usr/bin/npm
@@ -20,14 +20,29 @@ sudo ln -s $(which node) /usr/bin/node
 fi
 
 # install node if not already
-if [ -x "$(command -v node)" ]
+if [ ! -x "$(command -v yarn)" ]
 then
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install yarn -y --no-install-recommends
 fi
 
-for i in ts-node nodemon typescript webpack jest pm2
-  do
-    yarn global add $i
+toinstallglobalyarn=""
+
+if [ ! -x "$(command -v tsc)" ]
+then
+  toinstallglobalyarn="$toinstallglobalyarn typescript"
+fi
+
+for i in ts-node nodemon webpack jest pm2
+do
+  if [ ! -x "$(command -v $i)" ]
+  then
+  toinstallglobalyarn="$toinstallglobalyarn $i"
+  fi
 done
+
+if [ ! $toinstallglobalyarn == "" ]
+then
+  yarn global add $toinstallglobalyarn
+fi

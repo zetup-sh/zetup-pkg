@@ -1,4 +1,5 @@
 #!/bin/bash
+# probably needs a lot of work
 mkdir ~/background
 cd ~/background
 

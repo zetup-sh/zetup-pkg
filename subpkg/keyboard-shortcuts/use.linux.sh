@@ -1,3 +1,4 @@
+#!/bin/bash
 #addshortcut() {
   #name=$1
   #cmd=$2

@@ -11,6 +11,11 @@ sudo add-apt-repository \
    stable"
 sudo apt-get update
 sudo apt-get -y install docker-ce
+
+sudo systemctl enable docker
+sudo setfacl -m $USER:rw /var/run/docker.sock
+sudo usermod -aG docker $USER
+sudo service docker start
 fi
 
 # install docker-compose if not already installed
@@ -38,8 +43,3 @@ do
 done
 fi
 
-# these can run and not hurt anything every time
-sudo systemctl enable docker
-sudo setfacl -m $USER:rw /var/run/docker.sock
-sudo usermod -aG docker $USER
-sudo service docker start

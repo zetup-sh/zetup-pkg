@@ -1,7 +1,9 @@
 #!/bin/bash
 
+if ( [ ! -x "$(command -v vim)" ] || ! (( $( vim --version | grep -c "+python3") ))  );
+then
 # have to build from source for YouCompleteMe to work
-VIM_DIR=$ZETUP_BUILD_DIR/src/vim
+VIM_DIR=$ZETUP_USE_PKG/build/src/vim
 mkdir -p $VIM_DIR
 git clone https://github.com/vim/vim --depth=1 $VIM_DIR
 cd $VIM_DIR
@@ -33,7 +35,7 @@ sudo make install
 cd ..
 
 # ultisnips
-cp -r UltiSnips $HOME/.vim
+cp -r "$ZETUP_SUB_PKG_DIR/UltiSnips" "$HOME/.vim"
 
 # you complete me
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -41,3 +43,4 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +GoInstallBinaries +qa
 cd $HOME/.vim/bundle/YouCompleteMe
 ./install.py --js-completer --go-completer
+fi
