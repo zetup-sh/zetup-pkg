@@ -42,7 +42,8 @@ do
   fi
 done
 
-if [ ! $toinstallglobalyarn == "" ]
+if [ ! "$toinstallglobalyarn" == "" ];
 then
+  echo "toinstall: $toinstallglobalyarn"
   yarn global add $toinstallglobalyarn
 fi
