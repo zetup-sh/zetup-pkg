@@ -1,7 +1,7 @@
 eval `zetup env`
-exportconfig() {
-  sh "$ZETUP_USE_PKG/subpkg/vscode/exportconfig.sh"
+codeexportextensions() {
+  sh "$ZETUP_USE_PKG/subpkg/vscode/export-extensions.sh"
 }
-importconfig() {
-  sh "$ZETUP_USE_PKG/subpkg/vscode/importconfig.sh"
+codeimportextensions() {
+  sh "$ZETUP_USE_PKG/subpkg/vscode/import-extensions.sh"
 }

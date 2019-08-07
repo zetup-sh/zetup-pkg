@@ -34,10 +34,10 @@ sudo make install
 
 cd ..
 
-# ultisnips
+# UltiSnips
 cp -r "$ZETUP_SUB_PKG_DIR/UltiSnips" "$HOME/.vim"
 
-# you complete me
+# YouCompleteMe
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +GoInstallBinaries +qa
