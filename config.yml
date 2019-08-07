@@ -37,3 +37,5 @@ link:
 autostar: ask # ask to star your repo and follow you for future reference and updates could be "ask" or "never". It could also help your repo get on trending repositories!
 ignore-pkg: # put packages you don't want to install here
 # -- android dragonfly freebsd nacl netbsd openbsd plan9 solaris -- to add, will you?
+projects: # put your github projects here, and they'll automatically be cloned to $HOME/dev
+  - github.com/zetup-sh/zetup-pkg

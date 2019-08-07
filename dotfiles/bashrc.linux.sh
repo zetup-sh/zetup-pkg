@@ -1,5 +1,10 @@
 eval `zetup env`
 
+# temporary for development
+export PATH=$PATH:$HOME/go/bin
+export GOPATH=$HOME/go
+# end temporary
+
 . $HOME/.aliases
 . $HOME/.fns
 
