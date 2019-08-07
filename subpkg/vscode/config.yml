@@ -1,1 +1,8 @@
 type: editor
+link:
+  - os: linux
+    src:  "{{.ZetupDir}}/subpkg/vscode/config/keybindings.json"
+    target: "{{.Zetup}}/.config/Code/User/keybindings.json"
+  - os: linux
+    src:  "{{.ZetupDir}}/subpkg/vscode/config/settings.json"
+    target: "{{.Home}}/.config/Code/User/settings.json"

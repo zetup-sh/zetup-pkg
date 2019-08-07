@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# make vlc the default video application
 sed -n '
 1i[Default Applications]
 /^video/{

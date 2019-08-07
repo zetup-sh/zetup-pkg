@@ -3,7 +3,7 @@
 if ( [ ! -x "$(command -v vim)" ] || ! (( $( vim --version | grep -c "+python3") ))  );
 then
 # have to build from source for YouCompleteMe to work
-VIM_DIR=$ZETUP_USE_PKG/build/src/vim
+vim_diR=$ZETUP_USE_PKG/build/src/vim
 mkdir -p $VIM_DIR
 git clone https://github.com/vim/vim --depth=1 $VIM_DIR
 cd $VIM_DIR

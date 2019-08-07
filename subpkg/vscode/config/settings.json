@@ -1,0 +1,54 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "sync.gist": "6cad5487c9bc2391dc653dc1d384838d",
+    // "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
+    "vim.useCtrlKeys": true,
+    "vim.leader": ",",
+    "vim.handleKeys": {
+        "<C-b>": false,
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-w>": false,
+        "<C-/>": false,
+        "<C-n>": false,
+        "<C-d>": true,
+        "<C-k>": false,
+        "<C-s>": false
+    },
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Better Solarized Dark (No Italics)",
+    "terminal.integrated.fontWeight": "500",
+    "terminal.integrated.fontSize": 14,
+    "editor.fontWeight": "400",
+    "editor.fontSize": 14,
+    "editor.parameterHints.enabled": false,
+    "go.testOnSave": true,
+    "breadcrumbs.enabled": true,
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "editor.tabSize": 2,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.trimTrailingWhitespace": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["j"],
+            "after": ["g", "j"]
+        },
+        {
+            "before": ["k"],
+            "after": ["g", "k"]
+        }
+    ],
+    "git.autofetch": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    // "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
+    // "workbench.colorCustomizations": {
+    //     "activityBar.foreground": "#00ffff",
+    // },
+    // "editor.tokenColorCustomizations": {
+    //     "variables": "#00cccc"
+    // }
+}
