@@ -3,6 +3,10 @@ eval `zetup env`
 # temporary for development
 export PATH=$PATH:$HOME/go/bin
 export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/.yarn/bin
+export PATH=$PATH:$HOME/.zetup/pkg/github.com/zetup-sh/zetup-pkg/bin/linux/tmux
+export PATH=$PATH:$HOME/.zetup/pkg/github.com/zetup-sh/zetup-pkg/bin/linux/
+export PATH=$PATH:$HOME/.zetup/pkg/github.com/zetup-sh/zetup-pkg/bin/linux/git
 # end temporary
 
 . $HOME/.aliases

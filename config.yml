@@ -9,6 +9,7 @@ apt: # packages to install with apt (ubuntu/debian)
   - snapd
   - git
   - xclip
+  - net-tools
 snap: # packages to install with snap (linux)
   - jq
   - yq
