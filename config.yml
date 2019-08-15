@@ -1,41 +1,40 @@
-default-editor: code
-pkg-installers: # these are run in order
-  # Ubuntu
-  - name: apt
-    os: linux
-    lsb-id: ubuntu
-    pre: sudo apt-get update
-    install-cmd: sudo apt-get install {{.PkgName}} -yqq
-    pkgs:
-      - tmux
-      - cmake
-      - apt-transport-https
-      - wget
-      - ca-certificates
-      - software-properties-common
-      - snapd
-      - git
-      - xclip
-      - net-tools
-
-  # All linux distros
-  - name: snap
-    os: linux
-    cmd: "sudo snap install {{.PkgName}}"
-    pkgs:
-      - jq
-      - yq
-
-  # Mac OS
-  - name: brew
-    os: darwin
-    pre: "[ -x \"$(command -v brew)\" ] || /usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
-    install-cmd: brew install {{.PkgName}}
-    pkgs:
-
-
-brew: # stuff from [homebrew](https://brew.sh/) - for mac
-choco: # stuff from [chocolatey](https://chocolatey.org/) - for windows
+pkgs:
+  apt-get:
+    - tmux
+    - cmake
+    - apt-transport-https
+    - wget
+    - ca-certificates
+    - software-properties-common
+    - snapd
+    - git
+    - xclip
+    - net-tools
+  snap:
+    - jq
+    - yq
+  # zetup packages just install zetup sub packages (in ./subpkg).
+  # You can comment out packages you don't want to install
+  zetup:
+    - chrome
+    - docker
+    - go
+    - kubernetes
+    - node
+    - ui
+    - video
+    - vim
+    - virtualbox
+    - vscode
+  choco:
+    - gnuwin32-coreutils.install
+    - git.install
+    - postgresql
+    - jq
+    - 7zip.install
+    - autohotkey
+  brew:
+    - wget # just as an example
 link:
   - os: unix
     src:  "{{.ZetupDir}}/dotfiles/bashrc.sh"
@@ -56,5 +55,43 @@ link:
     src: "{{.ZetupDir}}/startup/zetup.desktop"
     target: "{{.Home}}/.config/autostart/zetup.desktop"
 
+test: "zane"
 projects: # put your github projects here, and they'll automatically be cloned to $HOME/dev
   - github.com/zetup-sh/zetup-pkg
+
+pkg-installers: # these are run in order
+  # Linux
+  - name: apt-get # debian based linux distros
+    os: linux
+    # `cmd` searches for command. if it exists, it installs the
+    # packages. If it doesn't, it does nothing
+    cmd: apt-get
+    install-cmd: |
+      sudo apt-get update
+      sudo apt-get install {{.PkgNames}} -yqq
+  - name: snap
+    os: linux
+    cmd: snap
+    install-cmd: "{{range .PkgNames}}sudo snap install {{.}}{{end}}"
+  - name: snap-classic
+    os: linux
+    cmd: snap
+    install-cmd: "{{range .PkgNames}}sudo snap install {{.}} --classic{{end}}"
+
+  # Mac
+  - name: brew
+    os: darwin
+    install-cmd: brew install {{.PkgNames}}
+    install-installer: "[ -x \"$(command -v brew)\" ] || /usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"" # installs brew if it doesn't exist
+
+  # Windows
+  - name: choco
+    os: windows
+    shell: powershell
+    install-cmd: choco install -y {{.PkgNames}}
+    install-installer: |
+      if (-Not (Get-Command choco -errorAction SilentlyContinue))
+      {
+        Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+      } # installs choco if it doesn't exist
+  # you can add your own installers here
