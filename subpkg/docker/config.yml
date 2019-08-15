@@ -1,0 +1,7 @@
+choco:
+  docker-toolbox
+  docker-compose
+brew:
+  docker
+  docker-machine
+  docker-compose

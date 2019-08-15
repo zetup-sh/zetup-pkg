@@ -13,30 +13,39 @@ apt: # packages to install with apt (ubuntu/debian)
 snap: # packages to install with snap (linux)
   - jq
   - yq
-subpkg: # sub packages in different repositories
-brew: # stuff from [homebrew](https://brew.sh/) - for mac
+brew: # brew will automatically be installed
+  - wget
 choco: # stuff from [chocolatey](https://chocolatey.org/) - for windows
+  yarn
+  nodejs.install
+  gnuwin32-coreutils.install
+  golang
+  dep
+  googlechrome
+  git.install
+  electron
+  postgresql
+  jq
+  7zip.install
+  autohotkey
 link:
-  - os: linux
-    src:  "{{.ZetupDir}}/dotfiles/bashrc.linux.sh"
+  - os: unix # unix applies to linux or darwin systems
+    src:  "{{.ZetupDir}}/dotfiles/bashrc.sh"
     target: "{{.Home}}/.bashrc"
-  - os: linux
-    src:  "{{.ZetupDir}}/dotfiles/aliases.linux.sh"
+  - os: unix
+    src:  "{{.ZetupDir}}/dotfiles/aliases.sh"
     target: "{{.Home}}/.aliases"
-  - os: linux
-    src:  "{{.ZetupDir}}/dotfiles/fns.linux.sh"
+  - os: unix
+    src:  "{{.ZetupDir}}/dotfiles/fns.sh"
     target: "{{.Home}}/.fns"
-  - os: linux
+  - os: unix
     src: "{{.ZetupDir}}/dotfiles/vimrc"
     target: "{{.Home}}/.vimrc"
-  - os: linux
+  - os: unix
     src: "{{.ZetupDir}}/dotfiles/tmux.conf"
     target: "{{.Home}}/.tmux.conf"
-  - os: linux
+  - os: unix
     src: "{{.ZetupDir}}/startup/zetup.desktop"
     target: "{{.Home}}/.config/autostart/zetup.desktop"
-autostar: ask # ask to star your repo and follow you for future reference and updates could be "ask" or "never". It could also help your repo get on trending repositories!
-ignore-pkg: # put packages you don't want to install here
-# -- android dragonfly freebsd nacl netbsd openbsd plan9 solaris -- to add, will you?
 projects: # put your github projects here, and they'll automatically be cloned to $HOME/dev
   - github.com/zetup-sh/zetup-pkg

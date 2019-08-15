@@ -3,19 +3,23 @@
 # install docker if not already installed
 if [ ! -x "$(command -v docker)" ]
 then
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-sudo apt-get update
-sudo apt-get -y install docker-ce
-
-sudo systemctl enable docker
-sudo setfacl -m $USER:rw /var/run/docker.sock
-sudo usermod -aG docker $USER
-sudo service docker start
+  if [ "$(uname -s)" == "Linux" ]
+    if [ "$(lsb_release -is)" == "Ubuntu" ]
+    then
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+      sudo apt-key fingerprint 0EBFCD88
+      sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+      sudo apt-get update
+      sudo apt-get -y install docker-ce
+    fi
+  fi
+    sudo systemctl enable docker
+    sudo setfacl -m $USER:rw /var/run/docker.sock
+    sudo usermod -aG docker $USER
+    sudo service docker start
 fi
 
 # install docker-compose if not already installed
