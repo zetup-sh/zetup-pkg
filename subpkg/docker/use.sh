@@ -4,6 +4,7 @@
 if [ ! -x "$(command -v docker)" ]
 then
   if [ "$(uname -s)" == "Linux" ]
+  then
     if [ "$(lsb_release -is)" == "Ubuntu" ]
     then
       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

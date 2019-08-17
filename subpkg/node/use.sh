@@ -8,6 +8,7 @@ NVM_VERSION="v12.4.0"
 mkdir $HOME/.nvm
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+nvm install "$NVM_VERSION"
 fi
 
 
@@ -29,21 +30,33 @@ fi
 
 toinstallglobalyarn=""
 
-if [ ! -x "$(command -v tsc)" ]
-then
-  toinstallglobalyarn="$toinstallglobalyarn typescript"
-fi
+# global install packages
+maybe_install=(
+  "ts-node"
+  "nodemon"
+  "webpack"
+  "jest"
+  "pm2"
+  "tsc/typescript"
+  "create-react-app"
+)
 
-for i in ts-node nodemon webpack jest pm2
+for pkg in "${maybe_install[@]}"
 do
-  if [ ! -x "$(command -v $i)" ]
+  pkg_split=(${pkg//\// })
+  test_cmd=${pkg_split[0]}
+  pkg_name=${pkg_split[1]}
+  if [ "$pkg_name" == "" ]
   then
-  toinstallglobalyarn="$toinstallglobalyarn $i"
+    pkg_name=${test_cmd}
+  fi
+  to_install=""
+  if [ ! "$(command -v $test_cmd)" ]
+  then
+    to_install="${to_install} ${pkg_name}"
+  fi
+  if [ "${to_install}" != "" ]
+  then
+    yarn global add "${to_install}"
   fi
 done
-
-if [ ! "$toinstallglobalyarn" == "" ];
-then
-  echo "toinstall: $toinstallglobalyarn"
-  yarn global add $toinstallglobalyarn
-fi
