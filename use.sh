@@ -15,10 +15,11 @@ then
     "xclip"
     "net-tools"
   )
+  apt_cache_prefix="installed-apt-"
   to_install=""
   for pkg in "${apt_installations[@]}"
   do
-    if [ "installed-apt-$(zetup cache get $pkg)" != "true" ]
+    if [ "$(zetup cache get $apt_cache_prefix$pkg)" != "true" ]
     then
       to_install="$to_install $pkg"
     fi
@@ -26,9 +27,31 @@ then
   if [ -n "${to_install}" ]
   then
     sudo apt-get update
-    sh -c "sudo apt install $to_install -yqq"
+    sh -c "sudo apt install $to_install -yqq" && \
+    for pkg in "${apt_installations[@]}"
+    do
+      zetup cache set "$apt_cache_prefix$pkg" true
+    done
   fi
 fi
+
+if [ -x "$(command -v snap)" ]
+then
+  apt_installations=(
+    "yq"
+  )
+  to_install=""
+  snap_cache_prefix="installed-snap"
+  for pkg in "${apt_installations[@]}"
+  do
+    if [ "$(zetup cache get $snap_cache_prefix$pkg)" != "true" ]
+    then
+      sudo snap install "$pkg" && \
+      zetup cache set "$snap_cache_prefix$pkg" true
+    fi
+  done
+fi
+
 
 # install brew on mac
 if [ "$(uname)" == "darwin" ]

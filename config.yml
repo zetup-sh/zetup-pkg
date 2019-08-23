@@ -1,15 +1,4 @@
 default-editor: code
-apt: # packages to install with apt (ubuntu/debian)
-  - tmux
-  - cmake
-  - apt-transport-https
-  - wget
-  - ca-certificates
-  - software-properties-common
-  - snapd
-  - git
-  - xclip
-  - net-tools
 snap: # packages to install with snap (linux)
   - jq
   - yq
@@ -28,24 +17,3 @@ choco: # stuff from [chocolatey](https://chocolatey.org/) - for windows
   jq
   7zip.install
   autohotkey
-link:
-  - os: unix # unix applies to linux or darwin systems
-    src:  "{{.ZetupDir}}/dotfiles/bashrc.sh"
-    target: "{{.Home}}/.bashrc"
-  - os: unix
-    src:  "{{.ZetupDir}}/dotfiles/aliases.sh"
-    target: "{{.Home}}/.aliases"
-  - os: unix
-    src:  "{{.ZetupDir}}/dotfiles/fns.sh"
-    target: "{{.Home}}/.fns"
-  - os: unix
-    src: "{{.ZetupDir}}/dotfiles/vimrc"
-    target: "{{.Home}}/.vimrc"
-  - os: unix
-    src: "{{.ZetupDir}}/dotfiles/tmux.conf"
-    target: "{{.Home}}/.tmux.conf"
-  - os: unix
-    src: "{{.ZetupDir}}/startup/zetup.desktop"
-    target: "{{.Home}}/.config/autostart/zetup.desktop"
-projects: # put your github projects here, and they'll automatically be cloned to $HOME/dev
-  - github.com/zetup-sh/zetup-pkg

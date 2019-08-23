@@ -37,10 +37,11 @@ Plug 'galooshi/vim-import-js'
 Plug 'scrooloose/nerdcommenter'
 Plug 'lifepillar/pgsql.vim'
 Plug 'Valloric/YouCompleteMe'
+Plug 'dahu/vim-fanfingtastic'
 call plug#end()
 
 " Persistent Undo
-set undofile 
+set undofile
 set undodir=~/.vim/undodir
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
@@ -57,7 +58,7 @@ au BufRead,BufNewFile *.css setfiletype scss
 if (has("autocmd"))
 au BufReadPost * if line("'\"") > 1 && line("'\"") < line("$") | exe "normal! g'\"" | endif
 endif
-"au BufRead,BufNewFile NERD_tree_1 
+"au BufRead,BufNewFile NERD_tree_1
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -225,7 +226,7 @@ map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git -
 
 fun! GlobalSearch(term)
   if (exists("b:NERDTree"))
-    let a:path =  join(g:NERDTreeFileNode.GetSelected()['path']['pathSegments'], " ") 
+    let a:path =  join(g:NERDTreeFileNode.GetSelected()['path']['pathSegments'], " ")
   else
     let a:path = join(split(expand("%:p"), "/"), " ")
   endif
@@ -238,7 +239,7 @@ fun! GitPush(message)
   exec "redraw!"
 endfun
 command! -nargs=1 GitPush call GitPush(<f-args>)
-fun! PushConfig(message) 
+fun! PushConfig(message)
   echom system("push-config " . "\"" . message . "\"")
 endfun
 command! -nargs=1 PushConfig call PushConfig(<f-args>)
