@@ -2,8 +2,8 @@
 
 source "$ZETUP_CUR_PKG/pkg-install-fns.sh"
 
-apt_install (
-  # add your apt packages here
+apt_pkgs=(
+  # add your pacman packages here
   "tmux"
   "cmake"
   "apt-transport-https"
@@ -14,23 +14,33 @@ apt_install (
   "git"
   "xclip"
   "net-tools"
+  "python-pip"
+  "python3-pip"
 )
+apt_install $apt_pkgs
 
-pacman_install (
+pacman_pkgs=(
   # add your pacman packages here
   "snapd"
   "binutils"
   "base-devel"
+  "cmake"
+  "python2-pip"
+  "python-pip"
 )
+pacman_install $pacman_pkgs
 
-snap_install (
-  # add you snap packages here
+snap_pkgs=(
+  # add your snap packages here
   "jq"
 )
+snap_install $snap_pkgs
 
-snap_classic_install (
+snap_classic_pkgs=(
+  # add your snap --classic packages here
   # "slack"
 )
+snap_classic_install $snap_classic_pkgs
 
 # install brew on mac
 if [ "$(uname)" == "darwin" ]
@@ -41,10 +51,11 @@ then
   fi
 fi
 
-brew_install (
+brew_pkgs=(
   # your brew packages here
   "wget"
 )
+brew_install $brew_pkgs
 
 
 zetup link "$ZETUP_CUR_PKG/dotfiles/bashrc.sh" "$HOME/.bashrc"

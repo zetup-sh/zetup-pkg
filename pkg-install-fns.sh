@@ -33,12 +33,22 @@ snap_classic_install_hof() {
 }
 
 brew_install() {
-  pkg_install snap snap_install_hof "${@}"
+  pkg_install brew brew_install_hof "${@}"
 }
 
 brew_install_hof() {
   for pkg in "$@" ; do
-    sudo snap install $pkg
+    sudo brew install $pkg
+  done
+}
+
+brew_cask_install() {
+  pkg_install brew brew_install_hof "${@}"
+}
+
+brew_cask_install_hof() {
+  for pkg in "$@" ; do
+    sudo brew cask install $pkg
   done
 }
 
