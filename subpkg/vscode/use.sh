@@ -9,4 +9,4 @@ fi
 
 eval `zetup env`
 
-sh "$ZETUP_USE_PKG/subpkg/vscode/import-extensions.sh"
+sh "$ZETUP_CUR_PKG/subpkg/vscode/import-extensions.sh"

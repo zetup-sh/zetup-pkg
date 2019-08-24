@@ -7,7 +7,7 @@ then
 fi
 
 active_extensions=`code --list-extensions`
-saved_extensions_list_file="$ZETUP_USE_PKG/subpkg/vscode/config/extension_list.txt"
+saved_extensions_list_file="$ZETUP_CUR_PKG/subpkg/vscode/config/extension_list.txt"
 
 # install all missing extensions
 saved_extensions=`cat $saved_extensions_list_file`

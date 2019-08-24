@@ -2,12 +2,12 @@
 
 eval `zetup env`
 
-for f in "$ZETUP_USE_PKG"/subpkg/*/bashrc.sh
+for f in "$ZETUP_CUR_PKG"/subpkg/*/bashrc.sh
 do
   source "$f"
 done
 
-bin_path="$ZETUP_USE_PKG/bin"
+bin_path="$ZETUP_CUR_PKG/bin"
 export PATH="$PATH:$bin_path"
 export PATH="$PATH:$bin_path/tmux"
 export PATH="$PATH:$bin_path/git"
