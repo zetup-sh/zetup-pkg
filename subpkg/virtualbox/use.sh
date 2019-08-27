@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ ! -x "$(command -v virtualbox)" ]] ; then
-  if ([ -x "$(command -v apt-get)" ; then
+if [ ! -x "$(command -v virtualbox)" ] ; then
+  if [ -x "$(command -v apt-get)" ] ; then
     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
     echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
     sudo apt update
@@ -14,6 +14,8 @@ if [ ! -x "$(command -v virtualbox)" ]] ; then
     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | rpm --import -
     zypper refresh
   fi
+
+  pamac_install virtualbox $(pacman -Qsq "^linux" | grep "^linux[0-9]*[-rt]*$" | awk '{print $1"-virtualbox-host-modules"}' ORS=' ')
 fi
 
 brew_cask_install virtualbox

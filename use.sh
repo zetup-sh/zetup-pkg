@@ -72,13 +72,13 @@ subpkgs_to_install=(
   "docker"
   "git"
   "go"
-  #" keyboard-shortcuts"
-  # "kubernetes"
+  #" keyboard-shortcuts" not ready
+  "kubernetes"
   "node"
   # "ui"
-  # "video"
+  "video"
   "vim"
-  #"virtualbox"
+  "virtualbox"
   "vscode"
 )
 

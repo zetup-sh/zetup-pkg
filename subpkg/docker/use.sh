@@ -15,7 +15,7 @@ if [ ! -x "$(command -v docker)" ] ; then
   sudo systemctl enable docker
   sudo setfacl -m $USER:rw /var/run/docker.sock
   sudo usermod -aG docker $USER
-  sudo service docker start
+  sudo systemctl start docker
 fi
 
 # install docker-compose if not already installed

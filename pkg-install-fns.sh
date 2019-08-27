@@ -32,6 +32,14 @@ snap_classic_install_hof() {
   done
 }
 
+pamac_install() {
+  pkg_install pamac pamac_install_hof "${@}"
+}
+
+pamac_install_hof() {
+  sudo pamac install --no-confirm "${@}"
+}
+
 brew_install() {
   pkg_install brew brew_install_hof "${@}"
 }
