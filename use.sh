@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$ZETUP_CUR_PKG/pkg-install-fns.sh"
+. "$ZETUP_CUR_PKG/pkg-install-fns.sh"
 
 apt_pkgs=(
   # add your pacman packages here
@@ -57,16 +57,31 @@ brew_pkgs=(
 )
 brew_install $brew_pkgs
 
+ssh-add $ZETUP_PRIVATE_KEY_FILE  2>/dev/null
 
-zetup link "$ZETUP_CUR_PKG/dotfiles/bashrc.sh" "$HOME/.bashrc"
-zetup link "$ZETUP_CUR_PKG/dotfiles/aliases.sh" "$HOME/.aliases"
-zetup link "$ZETUP_CUR_PKG/dotfiles/fns.sh" "$HOME/.fns"
-zetup link "$ZETUP_CUR_PKG/dotfiles/tmux.conf" "$HOME/.tmux.conf"
-zetup link "$ZETUP_CUR_PKG/dotfiles/vimrc" "$HOME/.vimrc"
+zetup link "$ZETUP_CUR_PKG/bash/bashrc.sh" "$HOME/.bashrc"
+zetup link "$ZETUP_CUR_PKG/bash/aliases.sh" "$HOME/.aliases"
+zetup link "$ZETUP_CUR_PKG/bash/fns.sh" "$HOME/.fns"
+zetup link "$ZETUP_CUR_PKG/tmux.conf" "$HOME/.tmux.conf"
 
 source "$HOME/.bashrc"
 
-for f in "$ZETUP_CUR_PKG"/subpkg/*/use.sh
-do
-  bash $f
+# uncomment to enable subpackages
+subpkgs_to_install=(
+  "chrome"
+  "docker"
+  "git"
+  "go"
+  #" keyboard-shortcuts"
+  # "kubernetes"
+  "node"
+  # "ui"
+  # "video"
+  "vim"
+  #"virtualbox"
+  "vscode"
+)
+
+for f in "${subpkgs_to_install[@]}" ; do
+  source "$ZETUP_CUR_PKG/subpkg/$f/use.sh"
 done

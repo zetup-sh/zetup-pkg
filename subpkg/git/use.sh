@@ -6,3 +6,5 @@ ssh-keygen -F github.com >/dev/null
 
 ssh-keygen -F gitlab.com >/dev/null
 (($? != 0)) && ssh-keyscan -H gitlab.com >> $HOME/.ssh/known_hosts 2>/dev/null
+
+ssh-add $ZETUP_PRIVATE_KEY_FILE >/dev/null 2>&1

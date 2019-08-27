@@ -12,6 +12,6 @@ if [ -x "$(command -v apt-get)" ] ; then
 
 # only chromium is available on other distros (except Fedora)
 else
-  snap_install ("chromium")
-  brew_cask_install ("google-chrome")
+  snap_install chromium
+  brew_cask_install google-chrome
 fi

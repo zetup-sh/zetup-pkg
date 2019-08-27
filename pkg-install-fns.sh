@@ -53,12 +53,12 @@ brew_cask_install_hof() {
 }
 
 snap_install() {
-  pkg_install brew brew_install_hof "${@}"
+  pkg_install snap snap_install_hof "${@}"
 }
 
 snap_install_hof() {
   for pkg in "$@" ; do
-    brew install $pkg
+    snap install $pkg
   done
 }
 
@@ -84,7 +84,7 @@ pkg_install() {
     if [ "${#to_install[@]}" -ne 0 ] ; then
       $install_hof "${to_install[@]}" &&
       # mark true in cache so we know it's installed
-      for pkg in "${to_install[@]}" ; do 
+      for pkg in "${to_install[@]}" ; do
         zetup cache set "$pac_cache_prefix$pkg" true
       done
     fi

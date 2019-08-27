@@ -1,0 +1,3 @@
+snap_classic_install kubectl minikube
+brew_install kubernetes-cli
+brew_cask_install minikube
