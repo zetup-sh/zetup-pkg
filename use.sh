@@ -98,3 +98,8 @@ subpkgs_to_install=(
 for f in "${subpkgs_to_install[@]}" ; do
   bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
 done
+
+
+if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] ; then
+  echo 'You might need to run `gnome-shell --replace` to finish snap installations'
+fi
