@@ -36,7 +36,7 @@ if ( [ -x "$(command -v pacman)" ] && \
   sudo systemctl enable snapd
   sudo systemctl start snapd
   i=0
-  while ! grep -m1 "active (running)" < "$(sudo systemctl status snapd)" ; do
+  while ! echo "$(sudo systemctl status snapd)" | grep -m1 "active (running)"  ; do
     sleep 1 # wait for snapd to start
     if [ i -gt 5 ] ; then # it's apparently not going to start
       echo "Warning: Snap service didn\'t start"
