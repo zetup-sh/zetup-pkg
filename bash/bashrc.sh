@@ -46,11 +46,10 @@ if [ -f "${SSH_ENV}" ]; then
   . "${SSH_ENV}" > /dev/null
   #ps ${SSH_AGENT_PID} doesn't work under cywgin
   ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-      start_agent
-  }
-  ssh-add "$ZETUP_PRIVATE_KEY_FILE"
-else
-  if [ -z "${SSH_AGENT_PID}" ]; then
     start_agent
-  fi
+    ssh-add "$ZETUP_PRIVATE_KEY_FILE" > /dev/null
+  }
+elif [ -z "${SSH_AGENT_PID}" ]; then
+  start_agent
+  ssh-add "$ZETUP_PRIVATE_KEY_FILE"
 fi
