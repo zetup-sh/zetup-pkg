@@ -35,8 +35,17 @@ if ( [ -x "$(command -v pacman)" ] && \
   pacman_install snapd
   sudo systemctl enable snapd
   sudo systemctl start snapd
-  sleep 1 # wait for snapd to start
+  i=0
+  while ! grep -m1 "active (running)" < "$(sudo systemctl status snapd)" ; do
+    sleep 1 # wait for snapd to start
+    if [ i -gt 5 ] ; then # it's apparently not going to start
+      echo "Warning: Snap service didn\'t start"
+      echo "Snap packages might not be installed"
+      break
+    fi
+  done
   source /etc/profile.d/snapd.sh
+
 fi
 
 
