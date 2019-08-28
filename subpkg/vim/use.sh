@@ -65,6 +65,8 @@ if [ -x "$(command -v vim)" ] ; then
   # UltiSnips
   cp -r "$ZETUP_CUR_PKG/subpkg/vim/UltiSnips" "$HOME/.vim"
 
+  cd $HOME/.vim/bundle/YouCompleteMe
+  ./install.py --js-completer --go-completer
   vim +PlugInstall +GoInstallBinaries +qa
 
   # I think this is automatic now ↓
