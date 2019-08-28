@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 mkdir -p "$HOME/dev"
 
@@ -19,7 +19,7 @@ apt_pkgs=(
   "python-pip"
   "python3-pip"
 )
-apt_install $apt_pkgs
+apt_install ${apt_pkgs[@]}
 
 pacman_pkgs=(
   # add your pacman packages here
@@ -29,7 +29,7 @@ pacman_pkgs=(
   "python2-pip"
   "python-pip"
 )
-pacman_install $pacman_pkgs
+pacman_install ${pacman_pkgs[@]}
 if ( [ -x "$(command -v pacman)" ] && \
     [ ! -x "$(command -v snap)" ] ); then
   pacman_install snapd
@@ -53,13 +53,13 @@ snap_pkgs=(
   # add your snap packages here
   "jq"
 )
-snap_install $snap_pkgs
+snap_install ${snap_pkgs[@]}
 
 snap_classic_pkgs=(
   # add your snap --classic packages here
   # "slack"
 )
-snap_classic_install $snap_classic_pkgs
+snap_classic_install ${snap_classic_pkgs[@]}
 
 # install brew on mac
 if [ "$(uname)" == "darwin" ]
@@ -74,7 +74,7 @@ brew_pkgs=(
   # your brew packages here
   "wget"
 )
-brew_install $brew_pkgs
+brew_install ${brew_pkgs[@]}
 
 ssh-add $ZETUP_PRIVATE_KEY_FILE  2>/dev/null
 
@@ -86,26 +86,29 @@ zetup link "$ZETUP_CUR_PKG/tmux.conf" "$HOME/.tmux.conf"
 source "$HOME/.bashrc"
 
 # uncomment to enable subpackages
-subpkgs_to_install=(
-  #"chrome"
-  #"docker"
-  #"git"
-  #"go"
+default_subpkgs_to_install=(
+  "chrome"
+  "docker"
+  "git"
+  "go"
   #" keyboard-shortcuts" not ready
   #"kubernetes"
-  #"node"
-  # "ui"
+  "node"
+  #"ui"
   #"video"
   "vim"
-  #"virtualbox"
-  #"vscode"
+  "virtualbox"
+  "vscode"
 )
+SUBPKGS="${SUBPKGS:-default_subpkgs_to_install}"
+
+
 
 
 
 
 for f in "${subpkgs_to_install[@]}" ; do
-  bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
+  sh -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
 done
 
 
