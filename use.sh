@@ -87,18 +87,18 @@ source "$HOME/.bashrc"
 
 # uncomment to enable subpackages
 subpkgs_to_install=(
-  "chrome"
-  "docker"
-  "git"
-  "go"
+  #"chrome"
+  #"docker"
+  #"git"
+  #"go"
   #" keyboard-shortcuts" not ready
-  "kubernetes"
-  "node"
+  #"kubernetes"
+  #"node"
   # "ui"
-  "video"
+  #"video"
   "vim"
-  "virtualbox"
-  "vscode"
+  #"virtualbox"
+  #"vscode"
 )
 
 

@@ -61,9 +61,13 @@ if ( [ ! -x "$(command -v vim)" ] || ! (( $( vim --version | grep -c "+python3")
 fi
 
 # add plugins if vim installed successfully
-if [ -x "$(command -v vim)" ] ; then
+if [ -x "$(command -v vim)" ]; then
+  echo running install vim
   # UltiSnips
-  cp -r "$ZETUP_CUR_PKG/subpkg/vim/UltiSnips" "$HOME/.vim"
+  ultisnips_dest="$ZETUP_CUR_PKG/subpkg/vim/UltiSnips"
+  if [ ! -d  ultisnips_dest ]; then
+    cp -r "$ZETUP_CUR_PKG/subpkg/vim/UltiSnips" "$HOME/.vim"
+  fi
 
   cd $HOME/.vim/bundle/YouCompleteMe
   ./install.py --js-completer --go-completer
