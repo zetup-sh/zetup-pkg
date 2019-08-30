@@ -55,6 +55,6 @@ do
     to_install="${to_install} ${pkg_name}"
   fi
   if [ "${to_install}" != "" ] ; then
-    yarn global add "${to_install}"
+    yarn global add "${to_install[@]}"
   fi
 done
