@@ -57,6 +57,6 @@ do
   fi
   if [ "${to_install}" != "" ]
   then
-    yarn global add "${to_install}"
+    yarn global add "${to_install[@]}"
   fi
 done
