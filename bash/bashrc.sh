@@ -33,6 +33,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 SSH_ENV="$HOME/.ssh/environment"
 
+#
 # start ssh agent if it's not already started
 #function start_agent {
     #/usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
