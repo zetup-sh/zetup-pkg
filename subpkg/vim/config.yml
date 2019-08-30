@@ -1,8 +1,0 @@
-apt:
-  - python-dev
-  - python3-dev
-  - libncurses5-dev
-  - libncursesw5-dev
-  - libx11-dev
-  - libxtst-dev
-  - xorg-dev

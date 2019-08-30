@@ -1,9 +1,9 @@
 #!/bin/bash
 
-eval `zetup env`
 if [ ! -x "$(command -v code)" ]
 then
   echo Could not find installation of vs code
+  return
 fi
 
 active_extensions=`code --list-extensions`

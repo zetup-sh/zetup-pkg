@@ -2,20 +2,22 @@
 
 # install docker if not already installed
 if [ ! -x "$(command -v docker)" ] ; then
-  if [ -x "$(command -v apt-get)"] ; then
+  if [ -x "$(command -v apt-get)" ] ; then
+    echo apt-get exists
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo apt-key fingerprint 0EBFCD88
     sudo add-apt-repository \
       "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     sudo apt-get update
     sudo apt-get -y install docker-ce
+    sudo systemctl enable docker
+    sudo setfacl -m $USER:rw /var/run/docker.sock
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    sudo systemctl start docker
   else
     snap_install docker
   fi
-  sudo systemctl enable docker
-  sudo setfacl -m $USER:rw /var/run/docker.sock
-  sudo usermod -aG docker $USER
-  sudo systemctl start docker
 fi
 
 # install docker-compose if not already installed

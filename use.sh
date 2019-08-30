@@ -30,6 +30,7 @@ pacman_pkgs=(
 )
 pacman_install $pacman_pkgs
 
+
 snap_pkgs=(
   # add your snap packages here
   "jq"
@@ -82,6 +83,8 @@ subpkgs_to_install=(
   "vscode"
 )
 
+
+
 for f in "${subpkgs_to_install[@]}" ; do
-  source "$ZETUP_CUR_PKG/subpkg/$f/use.sh"
+  bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
 done

@@ -9,7 +9,7 @@ zetup link "$ZETUP_CUR_PKG/subpkg/vim/vimrc" "$HOME/.vimrc"
 
 # build from source if python3 isn't detected (for YouCompleteMe)
 # Most OSes' vim packages support python 3 now, so it's probably not
-# necessary
+# as necessary
 if ( [ ! -x "$(command -v vim)" ] || ! (( $( vim --version | grep -c "+python3") ))  ); then
   apt_install_packages=(
     "python-dev"
@@ -65,12 +65,13 @@ if [ -x "$(command -v vim)" ] ; then
   # UltiSnips
   cp -r "$ZETUP_CUR_PKG/subpkg/vim/UltiSnips" "$HOME/.vim"
 
+  # I think this is automatic now ↓
   # YouCompleteMe
-  if ( [ -d "$PY2_CONFIG_DIR" ] || [ -d "$PY3_CONFIG_DIR" ] ) ; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    vim +PlugInstall +GoInstallBinaries +qa
-    cd $HOME/.vim/bundle/YouCompleteMe
-    ./install.py --js-completer --go-completer
-  fi
+  #if ( [ -d "$PY2_CONFIG_DIR" ] || [ -d "$PY3_CONFIG_DIR" ] ) ; then
+    #curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      #https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    #vim +PlugInstall +GoInstallBinaries +qa
+    #cd $HOME/.vim/bundle/YouCompleteMe
+    #./install.py --js-completer --go-completer
+  #fi
 fi

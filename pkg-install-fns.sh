@@ -66,7 +66,7 @@ snap_install() {
 
 snap_install_hof() {
   for pkg in "$@" ; do
-    snap install $pkg
+    sudo snap install $pkg
   done
 }
 
