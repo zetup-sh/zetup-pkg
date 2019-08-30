@@ -54,7 +54,7 @@ do
   if [ ! "$(command -v $test_cmd)" ] ; then
     to_install="${to_install} ${pkg_name}"
   fi
-  if [ "${to_install}" != "" ] ; then
-    yarn global add "${to_install[@]}"
-  fi
 done
+if [ "${to_install}" != "" ] ; then
+  yarn global add "${to_install[@]}"
+fi
