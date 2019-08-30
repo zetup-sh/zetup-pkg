@@ -31,6 +31,11 @@ pacman_pkgs=(
   "python-pip"
 )
 pacman_install $pacman_pkgs
+if [ -x "$(command -v pacman)" ] ; then
+  sudo systemctl enable snapd
+  sudo systemctl start snapd
+  source /etc/profile.d
+fi
 
 
 snap_pkgs=(

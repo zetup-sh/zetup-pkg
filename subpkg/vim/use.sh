@@ -65,6 +65,8 @@ if [ -x "$(command -v vim)" ] ; then
   # UltiSnips
   cp -r "$ZETUP_CUR_PKG/subpkg/vim/UltiSnips" "$HOME/.vim"
 
+  vim +PlugInstall +GoInstallBinaries +qa
+
   # I think this is automatic now ↓
   # YouCompleteMe
   #if ( [ -d "$PY2_CONFIG_DIR" ] || [ -d "$PY3_CONFIG_DIR" ] ) ; then
