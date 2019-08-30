@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p "$HOME/dev"
 . "$ZETUP_CUR_PKG/pkg-install-fns.sh"
 
 apt_pkgs=(
