@@ -23,7 +23,6 @@ apt_install $apt_pkgs
 
 pacman_pkgs=(
   # add your pacman packages here
-  "snapd"
   "binutils"
   "base-devel"
   "cmake"
@@ -31,9 +30,12 @@ pacman_pkgs=(
   "python-pip"
 )
 pacman_install $pacman_pkgs
-if [ -x "$(command -v pacman)" ] ; then
+if ( [ -x "$(command -v pacman)" ] && \
+    [ ! -x "$(command -v snap)" ] ); then
+  pacman_install snapd
   sudo systemctl enable snapd
   sudo systemctl start snapd
+  sleep 1 # wait for snapd to start
   source /etc/profile.d/snapd.sh
 fi
 
@@ -89,6 +91,7 @@ subpkgs_to_install=(
   "virtualbox"
   "vscode"
 )
+
 
 
 
