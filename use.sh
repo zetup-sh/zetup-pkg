@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mkdir -p "$HOME/dev"
 
@@ -103,7 +103,7 @@ cache_subpkgs="$(zetup cache get subpkgs)"
 subpkgs="${cache_subpkgs:-default_subpkgs_to_install}"
 
 for f in "${subpkgs[@]}" ; do
-  sh -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
+  bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
 done
 
 if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] ; then
