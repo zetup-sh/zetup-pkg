@@ -15,7 +15,8 @@ if [ ! -x "$(command -v go)" ] ; then
     sudo tar -xvf "go${VERSION}.linux-amd64.tar.gz"
     rm "go${VERSION}.linux-amd64.tar.gz"
     sudo mv go /usr/local
-    mkdir -p $HOME/go/src/{github.com,gitlab.com}
+    mkdir -p "${HOME}/go/src/{github.com,gitlab.com}"
+    mkdir -p "${HOME}/go/bin"
     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   fi
 fi

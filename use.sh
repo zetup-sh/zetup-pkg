@@ -45,7 +45,6 @@ if ( [ -x "$(command -v pacman)" ] && \
     fi
   done
   source /etc/profile.d/snapd.sh
-
 fi
 
 
