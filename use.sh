@@ -99,7 +99,7 @@ default_subpkgs_to_install=(
   "virtualbox"
   "vscode"
 )
-cache_subpkgs="$(zetup cache subpkgs)"
+cache_subpkgs="$(zetup cache get subpkgs)"
 subpkgs="${cache_subpkgs:-default_subpkgs_to_install}"
 
 for f in "${subpkgs[@]}" ; do
