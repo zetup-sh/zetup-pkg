@@ -61,8 +61,7 @@ if ( [ ! -x "$(command -v vim)" ] || ! (( $( vim --version | grep -c "+python3")
 fi
 
 # add plugins if vim installed successfully
-if [ -x "$(command -v vim)" ]; then
-  echo running install vim
+if [ -x "$(command -v vim)" ] && [ "$(zetup cache get ycm-installed)" != "true" ]; then
   # UltiSnips
   ultisnips_dest="$ZETUP_CUR_PKG/subpkg/vim/UltiSnips"
   if [ ! -d  ultisnips_dest ]; then
@@ -72,6 +71,8 @@ if [ -x "$(command -v vim)" ]; then
   cd $HOME/.vim/bundle/YouCompleteMe
   ./install.py --js-completer --go-completer
   vim +PlugInstall +GoInstallBinaries +qa
+  zetup cache set ycm-installed true
+
 
   # I think this is automatic now ↓
   # YouCompleteMe

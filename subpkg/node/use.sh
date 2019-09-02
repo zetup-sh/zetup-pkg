@@ -1,8 +1,10 @@
 #!/bin/bash
 
+source ~/.bashrc
+
 # install nvm if not already
 NVM_DIR="$HOME/.nvm"
-if [ ! -d "$NVM_DIR" ] ; then
+if [ ! -s "$NVM_DIR/nvm.sh" ] ; then
   NVM_VERSION="v12.4.0"
   mkdir $HOME/.nvm
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
@@ -42,17 +44,16 @@ maybe_install=(
   "create-react-app"
 )
 
-for pkg in "${maybe_install[@]}"
-do
+to_install=()
+for pkg in "${maybe_install[@]}"; do
   pkg_split=(${pkg//\// })
   test_cmd=${pkg_split[0]}
   pkg_name=${pkg_split[1]}
   if [ "$pkg_name" == "" ] ; then
     pkg_name=${test_cmd}
   fi
-  to_install=""
-  if [ ! "$(command -v $test_cmd)" ] ; then
-    to_install="${to_install} ${pkg_name}"
+  if [ ! -x "$(command -v $test_cmd)" ] ; then
+    to_install+=("${pkg_name}")
   fi
 done
 if [ "${to_install}" != "" ] ; then
