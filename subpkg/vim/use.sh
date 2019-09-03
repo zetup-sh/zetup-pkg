@@ -70,8 +70,8 @@ if [ -x "$(command -v vim)" ]; then
   fi
 
   cd $HOME/.vim/bundle/YouCompleteMe
-  ./install.py --js-completer --go-completer
   vim +PlugInstall +GoInstallBinaries +qa
+  ./install.py --js-completer --go-completer
 
   # I think this is automatic now ↓
   # YouCompleteMe
