@@ -38,7 +38,7 @@ function start_agent {
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
     chmod 600 "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
+    /usr/bin/ssh-add >/dev/null 2>&1
 }
 
 # Source SSH settings, if applicable
@@ -47,9 +47,9 @@ if [ -f "${SSH_ENV}" ]; then
   #ps ${SSH_AGENT_PID} doesn't work under cywgin
   ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
     start_agent
-    ssh-add "$ZETUP_PRIVATE_KEY_FILE" > /dev/null
+    ssh-add "$ZETUP_PRIVATE_KEY_FILE" > /dev/null 2>&1
   }
 elif [ -z "${SSH_AGENT_PID}" ]; then
   start_agent
-  ssh-add "$ZETUP_PRIVATE_KEY_FILE"
+  ssh-add "$ZETUP_PRIVATE_KEY_FILE" >/dev/null 2>&1
 fi
