@@ -10,6 +10,7 @@ apt_pkgs=(
   "cmake"
   "apt-transport-https"
   "wget"
+  "curl"
   "ca-certificates"
   "software-properties-common"
   "snapd"
@@ -28,6 +29,7 @@ pacman_pkgs=(
   "cmake"
   "python2-pip"
   "python-pip"
+  "curl"
 )
 pacman_install ${pacman_pkgs[@]}
 if ( [ -x "$(command -v pacman)" ] && \
@@ -99,12 +101,18 @@ default_subpkgs_to_install=(
   "virtualbox"
   "vscode"
 )
-cache_subpkgs="$(zetup cache get subpkgs)"
-subpkgs="${cache_subpkgs:-default_subpkgs_to_install}"
 
-for f in "${subpkgs[@]}" ; do
-  bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
-done
+cache_subpkgs="$(zetup cache get subpkgs)"
+if [ -n "${cache_subpkgs}" ]; then
+  for f in "$(echo ${cache_subpkgs} | cut -d' ' -f1)" ; do
+    bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
+  done
+else
+  for f in "${default_subpkgs_to_install[@]}" ; do
+    bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
+  done
+fi
+
 
 if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] ; then
   echo 'You might need to run `gnome-shell --replace` to finish snap installations'

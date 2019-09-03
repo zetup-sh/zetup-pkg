@@ -9,7 +9,7 @@ ssh-keygen -F gitlab.com >/dev/null
 
 git_completion_location="$HOME/git-completion.bash"
 if [ ! -f "${git_completion_location}" ]; then
-  curl -L "https://github.com/git/git/blob/master/contrib/completion/git-completion.bash" -o git_completion_location
+  curl -L "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash" -o "${git_completion_location}"
 fi
 
 ssh-add $ZETUP_PRIVATE_KEY_FILE >/dev/null 2>&1

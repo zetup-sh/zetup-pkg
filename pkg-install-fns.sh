@@ -83,7 +83,7 @@ pkg_install() {
     pac_cache_prefix="installed-$command-"
     to_install=()
     for (( i=3; i<=$#; i++)) {
-      eval pkg='$'$i
+      eval pkg='${'$i'}'
       # check cache to see if it's already installed
       if [ "$(zetup cache get $pac_cache_prefix$pkg)" != "true" ] ; then
         to_install+=("$pkg")
