@@ -17,6 +17,7 @@ if ( [ ! -x "$(command -v vim)" ] || ! (( $( vim --version | grep -c "+python3")
     "libx11-dev"
     "libxtst-dev"
     "xorg-dev"
+    "dos2unix"
   )
 
   apt_install apt_install_packages
@@ -66,9 +67,8 @@ if [ -x "$(command -v vim)" ] && [ "$(zetup cache get ycm-installed)" != "true" 
     cp -r "$ZETUP_CUR_PKG/subpkg/vim/UltiSnips" "$HOME/.vim"
   fi
 
-  cd $HOME/.vim/bundle/YouCompleteMe
   vim +PlugInstall +GoInstallBinaries +qa
-  ./install.py --js-completer --go-completer
+  python $HOME/.vim/bundle/YouCompleteMe/install.py --js-completer --go-completer
   zetup cache set ycm-installed true
 
   # I think this is automatic now ↓
