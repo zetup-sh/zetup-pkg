@@ -2,6 +2,7 @@
 
 mkdir -p "$HOME/dev"
 
+
 . "$ZETUP_CUR_PKG/pkg-install-fns.sh"
 
 apt_pkgs=(
@@ -62,11 +63,19 @@ snap_classic_pkgs=(
 )
 snap_classic_install ${snap_classic_pkgs[@]}
 
-# install brew on mac
-if [ "$(uname)" == "darwin" ]
-then
-  if [ ! -x "$(command -v brew)" ]
-  then
+if [ "$(uname)" == "Darwin" ]; then
+  # install developer tools
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+  PROD=$(softwareupdate -l |
+  grep "\*.*Command Line.*$(sw_vers -productVersion|awk -F. '{print $1"."$2}')" |
+  head -n 1 | awk -F"*" '{print $2}' |
+  sed -e 's/^ *//' |
+  tr -d '\n')
+  softwareupdate -i "$PROD" --verbose
+  rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+
+  # install brew
+  if [ ! -x "$(command -v brew)" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 fi
