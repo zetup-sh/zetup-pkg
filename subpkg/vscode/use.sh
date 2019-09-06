@@ -3,6 +3,7 @@
 mkdir -p "$HOME/.config/Code/User"
 
 snap_classic_install code
+brew_cask_install visual-studio-code
 
 sh "$ZETUP_CUR_PKG/subpkg/vscode/import-extensions.sh"
 

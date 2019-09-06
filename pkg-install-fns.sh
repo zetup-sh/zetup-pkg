@@ -46,17 +46,17 @@ brew_install() {
 
 brew_install_hof() {
   for pkg in "$@" ; do
-    sudo brew install $pkg
+    brew install $pkg
   done
 }
 
 brew_cask_install() {
-  pkg_install brew brew_install_hof "${@}"
+  pkg_install brew brew_cask_install_hof "${@}"
 }
 
 brew_cask_install_hof() {
   for pkg in "$@" ; do
-    sudo brew cask install $pkg
+    brew cask install $pkg
   done
 }
 

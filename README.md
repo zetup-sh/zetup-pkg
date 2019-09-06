@@ -1,5 +1,9 @@
 # zetup
 
+### Requirements
+
+OS X: version 10.9 or higher
+
 ### To Run
 
 `wget https://github.com/zwhitchcox/zetup/raw/public/init.sh && source init.sh`
@@ -56,7 +60,7 @@ If you need to extend a file, simply put it in the `custom` directory. If you ne
 * [bashrc.sh](dotfiles/_bashrc.sh): initialization script, does things like add scripts to path, set history size, enable bash autocompletion, changes to the `dev` directory, etc.
 * [tmux.conf](dotfiles/_tmux.conf): [tmux configuration file](https://github.com/tmux/tmux)
 * [vimrc](dotfiles/_vimrc): [vim run command](https://www.vim.org/)
- 
+
 
 ### UI
 
