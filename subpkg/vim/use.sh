@@ -2,6 +2,7 @@
 
 pacman_install vim
 apt_install vim
+brew_install vim
 
 zetup link "$ZETUP_CUR_PKG/subpkg/vim/vimrc" "$HOME/.vimrc"
 

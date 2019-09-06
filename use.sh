@@ -2,8 +2,11 @@
 
 mkdir -p "$HOME/dev"
 
-
 . "$ZETUP_CUR_PKG/pkg-install-fns.sh"
+
+if [ -n "$ZETUP_SYSTEM_PASS" ]; then
+
+fi
 
 apt_pkgs=(
   # add your pacman packages here
@@ -20,6 +23,7 @@ apt_pkgs=(
   "net-tools"
   "python-pip"
   "python3-pip"
+  "geoip-bin"
 )
 apt_install ${apt_pkgs[@]}
 
@@ -31,6 +35,7 @@ pacman_pkgs=(
   "python2-pip"
   "python-pip"
   "curl"
+  "geoip"
 )
 pacman_install ${pacman_pkgs[@]}
 if ( [ -x "$(command -v pacman)" ] && \
@@ -50,12 +55,25 @@ if ( [ -x "$(command -v pacman)" ] && \
   source /etc/profile.d/snapd.sh
 fi
 
-
 snap_pkgs=(
   # add your snap packages here
   "jq"
+  "htop"
+  "links"
+  "irssi"
 )
 snap_install ${snap_pkgs[@]}
+
+if [ -x "$(command -v snap)" ] && [ -x "$(command -v htop)" ]; then
+  sudo snap connect htop:mount-observe
+  sudo snap connect htop:process-control
+  sudo snap connect htop:system-observe
+  sudo snap connect htop:network-control  # DELAYACCT support (optional)
+fi
+
+if [ -x "$(command -v snap)" ] && [ -x "$(command -v nmap)" ]; then
+  sudo snap connect nmap:network-control
+fi
 
 snap_classic_pkgs=(
   # add your snap --classic packages here
@@ -102,6 +120,8 @@ brew_pkgs=(
   # your brew packages here
   "wget" # file downloader
   "cask" # another package installer
+  "mas" # mac app store cli installer
+  "autoconf" "automake" "libtool" # build tools
   "git" # source control (newer version)
   "htop" # system monitor
   "nmap" # security scanner
@@ -111,6 +131,8 @@ brew_pkgs=(
   "bash-completion"
   "watch" # watch for changes in output of command
   "tmux" # terminal multiplexer
+  "python" # python 3
+  "wifi-password" # display wifi password of current network
 )
 brew_install ${brew_pkgs[@]}
 
@@ -118,6 +140,14 @@ brew_cask_install_pkgs=(
   "iterm2"
 )
 brew_cask_install ${brew_cask_install_pkgs}
+
+pip_pkgs=(
+  "tldr" # abbreviated man pages, community driven
+  "jq" # json cli parser
+  "yq" # yaml cli parser
+  "speedtest-cli"
+)
+pip_install ${pip_pkgs[@]}
 
 ssh-add $ZETUP_PRIVATE_KEY_FILE  2>/dev/null
 
@@ -130,18 +160,18 @@ source "$HOME/.bashrc"
 
 # uncomment to enable subpackages
 default_subpkgs_to_install=(
-  # "chrome"
-  # "docker"
-  # "git"
-  # "go"
-  # #" keyboard-shortcuts" not ready
-  # #"kubernetes"
-  # "node"
-  # #"ui"
-  # #"video"
-  # "vim"
-  # "virtualbox"
-  # "vscode"
+  "chrome"
+  "docker"
+  "git"
+  "go"
+  #" keyboard-shortcuts" not ready
+  "kubernetes"
+  "node"
+  # "ui"
+  "video"
+  "vim"
+  "virtualbox"
+  "vscode"
 )
 
 cache_subpkgs="$(zetup cache get subpkgs)"
@@ -154,7 +184,6 @@ else
     bash -c "source $ZETUP_CUR_PKG/pkg-install-fns.sh && source $ZETUP_CUR_PKG/subpkg/$f/use.sh"
   done
 fi
-
 
 if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] ; then
   echo 'You might need to run `gnome-shell --replace` to finish snap installations'

@@ -70,6 +70,19 @@ snap_install_hof() {
   done
 }
 
+if [ -x "$(command -v pip3)" ] && [ ! -x "$(command -v pip)" ]; then
+  alias pip="pip3"
+fi
+pip_install() {
+  pkg_install pip pip_install_hof "${@}"
+}
+
+pip_install_hof() {
+  for pkg in "$@" ; do
+    sudo pip install $pkg
+  done
+}
+
 # takes a command, an install function, and packages to install
 # if the command exists, it checks the cache to see if
 # the packages are already installed.

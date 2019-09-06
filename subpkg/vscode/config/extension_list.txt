@@ -1,8 +1,6 @@
-ahmadawais.shades-of-purple
 arcticicestudio.nord-visual-studio-code
 bbrakenhoff.solarized-light-custom
 dabbott.vscode-import-js
-daylerees.rainglow
 dbaeumer.vscode-eslint
 devine-davies.make-hidden
 eamodio.toggle-excluded-files
@@ -31,6 +29,4 @@ wangtao0101.vscode-js-import
 wayou.vscode-todo-highlight
 wesbos.theme-cobalt2
 yzhang.markdown-all-in-one
-zwhitchcox.graphql-authorization-and-validation-directives-highlighting
-zwhitchcox.vs-code-extension-toggle-graphql-validation-directives
 zwhitchcox.zwhitchcox-better-solarized-dark-theme

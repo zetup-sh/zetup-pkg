@@ -2,7 +2,9 @@
 
 eval `zetup env`
 
-if [ -n "$ZETUP_CUR_PKG" ]
+# let bashrc function normally if they just deleted
+# zetup without uninstalling
+if [ -n "$ZETUP_CUR_PKG" ] && [ -x "$(command -v zetup)" ]; then
   for f in "$ZETUP_CUR_PKG"/subpkg/*/bashrc.sh; do
     . "$f"
   done

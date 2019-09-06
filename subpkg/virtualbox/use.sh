@@ -14,7 +14,9 @@ if [ ! -x "$(command -v virtualbox)" ] ; then
     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | rpm --import -
     zypper refresh
   fi
+fi
 
+if [ -x "$(command -v pacman)" ]; then
   pamac_install virtualbox $(pacman -Qsq "^linux" | grep "^linux[0-9]*[-rt]*$" | awk '{print $1"-virtualbox-host-modules"}' ORS=' ')
 fi
 
