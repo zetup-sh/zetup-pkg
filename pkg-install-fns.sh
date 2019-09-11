@@ -74,12 +74,22 @@ if [ -x "$(command -v pip3)" ] && [ ! -x "$(command -v pip)" ]; then
   alias pip="pip3"
 fi
 pip_install() {
-  pkg_install pip pip_install_hof "${@}"
+  if [ -x "$(command -v pip3)" ]; then
+    pkg_install pip3 pip_install_hof "${@}"
+  else
+    pkg_install pip pip_install_hof "${@}"
+  fi
 }
 
 pip_install_hof() {
   for pkg in "$@" ; do
     sudo pip install $pkg
+  done
+}
+
+pip3_install_hof() {
+  for pkg in "$@" ; do
+    sudo pip3 install $pkg
   done
 }
 

@@ -12,4 +12,6 @@ alias chrome="google-chrome-stable"
 alias ~~="cd $HOME/dev"
 alias get-pub="cat ~/.ssh/id_rsa.pub | xclip -selection c"
 alias logout="gnome-session-quit"
-alias "ls=ls --color=auto"
+if ls --color=auto 1>/dev/null 2>&1; then
+  alias "ls=ls --color=auto"
+fi
