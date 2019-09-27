@@ -97,9 +97,9 @@ pip_install ${pip_pkgs[@]}
 
 ssh-add $ZETUP_PRIVATE_KEY_FILE  2>/dev/null
 
-zetup link "$ZETUP_CUR_PKG/bash/bashrc.sh" "$HOME/.bashrc"
-zetup link "$ZETUP_CUR_PKG/bash/aliases.sh" "$HOME/.aliases"
-zetup link "$ZETUP_CUR_PKG/bash/fns.sh" "$HOME/.fns"
+zetup link "$ZETUP_CUR_PKG/shell/bashrc.sh" "$HOME/.bashrc"
+zetup link "$ZETUP_CUR_PKG/shell/aliases.sh" "$HOME/.aliases"
+zetup link "$ZETUP_CUR_PKG/shell/fns.sh" "$HOME/.fns"
 zetup link "$ZETUP_CUR_PKG/tmux.conf" "$HOME/.tmux.conf"
 
 source "$HOME/.bashrc"

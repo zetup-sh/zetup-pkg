@@ -11,7 +11,6 @@ saved_extensions_list_file="$ZETUP_CUR_PKG/subpkg/vscode/config/extension_list.t
 
 # install all missing extensions
 saved_extensions=`cat $saved_extensions_list_file`
-for ext in $saved_extensions
-do
+for ext in $saved_extensions; do
   $(echo "$active_extensions" | grep -q "$ext") || code --install-extension "$ext"
 done
