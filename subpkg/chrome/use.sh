@@ -10,6 +10,15 @@ if [ -x "$(command -v apt-get)" ] ; then
     xdg-settings set default-web-browser google-chrome.desktop
   fi
 
+elif [ -x "$(command -v pacman)" ]; then
+  if [ ! -x "$(command -v google-chrome-stable)" ]; then
+    cd /tmp
+    git clone https://aur.archlinux.org/google-chrome.git
+    cd google-chrome
+    makepkg -s
+    sudo pacman -U --noconfirm  google-chrome*.xz
+  fi
+
 # only chromium is available on other distros (except Fedora)
 else
   snap_install chromium

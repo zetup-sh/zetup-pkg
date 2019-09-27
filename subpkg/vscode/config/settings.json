@@ -16,7 +16,7 @@
         "<C-s>": false
     },
     "window.zoomLevel": 1,
-    "workbench.colorTheme": "Better Solarized Dark (No Italics)",
+    "workbench.colorTheme": "Nord",
     "terminal.integrated.fontWeight": "500",
     "terminal.integrated.fontSize": 14,
     "editor.fontWeight": "400",
