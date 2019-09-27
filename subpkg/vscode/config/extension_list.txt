@@ -21,7 +21,6 @@ rust-lang.rust
 ryanolsonx.solarized
 scala-lang.scala
 sdras.night-owl
-Shan.code-settings-sync
 shd101wyy.markdown-preview-enhanced
 slevesque.vscode-autohotkey
 vscodevim.vim
