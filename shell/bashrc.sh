@@ -51,5 +51,3 @@ elif [ -z "${SSH_AGENT_PID}" ]; then
   start_agent
   ssh-add "$ZETUP_PRIVATE_KEY_FILE" >/dev/null 2>&1
 fi
-eval `ssh-agent`
-ssh-add $HOME/.ssh/zetup_id_rsa

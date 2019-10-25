@@ -17,6 +17,9 @@ if [ ! -x "$(command -v docker)" ] ; then
     sudo systemctl start docker
   else
     snap_install docker
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    sudo setfacl -m $USER:rw /var/run/docker.sock
   fi
 fi
 
