@@ -2,6 +2,16 @@
 
 ## IGNORE THIS FILE UNLESS YOU WANT TO ADD A PACKAGE MANAGER ##
 
+cargo_install() {
+  pkg_install cargo cargo_install_hof "${@}"
+}
+
+cargo_install_hof() {
+  for pkg in "$@" ; do
+    sudo cargo -S --noconfirm $pkg
+  done
+}
+
 pacman_install() {
   pkg_install pacman pacman_install_hof "${@}"
 }
