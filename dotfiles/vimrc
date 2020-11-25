@@ -29,15 +29,15 @@ Plug 'mhartington/vim-typings'
 Plug 'chemzqm/vim-jsx-improve'
 Plug 'zwhitchcox/grep.vim'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'fatih/molokai'
 Plug 'galooshi/vim-import-js'
 Plug 'scrooloose/nerdcommenter'
 Plug 'lifepillar/pgsql.vim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'dahu/vim-fanfingtastic'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'dahu/vim-fanfingtastic'
 call plug#end()
 
 " Persistent Undo
